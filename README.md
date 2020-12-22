@@ -22,6 +22,15 @@
 </UL>
 
 
+<BR><strong>ENABLED</strong>
+<UL>
+  <LI>Items</LI>
+  <LI>Triggers</LI>
+  <LI>Graphs</LI>
+  <LI>Discovery rules</LI>
+</UL>
+
+
 <BR><strong>LINKED TEMPLATES</strong>
 <OL>
   <LI>Template Module ICMP Ping
