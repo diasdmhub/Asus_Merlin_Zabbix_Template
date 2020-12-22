@@ -63,6 +63,7 @@
   <LI>Template Module Zabbix agent: Version of Zabbix agent running
   <LI>Template Module Zabbix agent: Zabbix agent availability
   <LI>Template Module Zabbix agent: Zabbix agent ping
+  <LI><i>Network discovery items</i>
 </OL>
 
 
