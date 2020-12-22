@@ -70,6 +70,6 @@
 <BR><strong>TESTED AS IS</strong>
 <BR>
 <strong><i>
-  This template was tested only with a Asus RT-AC86U router running a Asus Merlin firmware.
+  This template was tested only with an Asus RT-AC86U router running a Asus Merlin firmware.
   It should work with other Asus routers as well
 </i></strong>
