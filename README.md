@@ -16,7 +16,8 @@
       </UL>
   <LI>Zabbix agent configuration</LI>
       <UL>
-        <LI>AllowRoot=1 <strong><i>(necessary for advanced temperature checks)</i></strong></LI>
+        <LI>Configure file with your router parameters</LI>
+        <LI><code>AllowRoot=1</code> parameter<i>(necessary for advanced temperature checks)</i></LI>
         <small><i><a href=https://www.zabbix.com/forum/zabbix-troubleshooting-and-problems/402023-zabbix-agent-system-run>Zabbix forum discussion</a></i></small>
       </UL>
 </UL>
