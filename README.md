@@ -78,6 +78,10 @@
 </OL>
 
 
+<BR><strong>GRAPH EXAMPLE</strong>
+  <BR><BR><img src="zabbix_graph_example.PNG" alt="Graph examples">
+
+
 <BR><strong>TESTED AS IS</strong>
 <BR>
 <strong><i>
