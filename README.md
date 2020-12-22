@@ -8,7 +8,8 @@
 <BR><BR><strong>REQUIREMENTS</strong>
 
 <UL>
-  <LI>Asus Router WRT Merlin Router</LI>
+  <LI>Asus WRT Router with Merlin firmware</LI>
+  <LI>Entware installed</LI>
   <LI>Zabbix agent installed</LI>
       <UL>
         <LI>Agent installation: <a href=https://www.snbforums.com/threads/rt-ac86u-with-zabbix-agent.64343/#post-587787>SNB Forum topic</a></LI>
