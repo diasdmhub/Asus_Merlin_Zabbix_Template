@@ -35,6 +35,8 @@
 <BR><strong>LINKED TEMPLATES</strong>
 <OL>
   <LI>Template Module ICMP Ping
+  <LI>Template Module Linux block devices by Zabbix agent
+  <LI>Template Module Linux filesystems by Zabbix agent
   <LI>Template Module Linux network interfaces by Zabbix agent
   <LI>Template Module Zabbix agent
 </OL>
@@ -75,6 +77,8 @@
   <LI>Template Module Zabbix agent: Zabbix agent availability
   <LI>Template Module Zabbix agent: Zabbix agent ping
   <LI><i>Network discovery items</i>
+  <LI><i>Mounted filesystem discovery</i>
+  <LI><i>Block devices discovery</i>
 </OL>
 
 
