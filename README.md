@@ -89,7 +89,7 @@
 
 
 <BR><strong>GRAPH EXAMPLE</strong>
-  <BR><BR><img src="zabbix_graph_example.PNG" alt="Graph examples">
+  <BR><BR><img src="zabbix_graph_example.png" alt="Graph examples">
 
 <BR>
 <UL>
