@@ -44,14 +44,15 @@
 
 <BR><strong>AVALIABLE ITEMS</strong>
 <OL>
-  <LI>Available memory
   <LI>Connected clients
   <LI>CPU idle time
   <LI>CPU idle time: CPU utilization
   <LI>DHCP Leases
   <LI>Template Module Zabbix agent: Host name of Zabbix agent running
   <LI>HTTP Performance
+  <LI>HTTP Performance Average
   <LI>HTTPS Performance
+  <LI>HTTPS Performance Average
   <LI>Template Module ICMP Ping: ICMP loss
   <LI>Template Module ICMP Ping: ICMP ping
   <LI>Template Module ICMP Ping: ICMP response time
@@ -59,8 +60,14 @@
   <LI>Load average (5m avg)
   <LI>Load average (15m avg)
   <LI>Maximum number of processes
+  <LI>Memory available
+  <LI>Memory total
   <LI>Memory utilization
+  <LI>Memory WebUI Free
+  <LI>Memory total: Memory WebUI Total
+  <LI>Memory WebUI Used
   <LI>NTP Performance
+  <LI>NTP Performance Average
   <LI>Number of CPUs
   <LI>Number of processes
   <LI>Number of running processes
@@ -72,7 +79,6 @@
   <LI>Temperature CPU
   <LI>Temperature Wireless 2.4GHz
   <LI>Temperature Wireless 5.0GHz
-  <LI>Total memory
   <LI>Template Module Zabbix agent: Version of Zabbix agent running
   <LI>Template Module Zabbix agent: Zabbix agent availability
   <LI>Template Module Zabbix agent: Zabbix agent ping
@@ -84,6 +90,11 @@
 
 <BR><strong>GRAPH EXAMPLE</strong>
   <BR><BR><img src="zabbix_graph_example.PNG" alt="Graph examples">
+
+<BR>
+<UL>
+  <LI><a href=https://www.snbforums.com/threads/gui-memory-x-meminfo.68683/#post-645321>WEB UI Memory discussion</a></LI>
+</UL>
 
 
 <BR><strong>TESTED AS IS</strong>
