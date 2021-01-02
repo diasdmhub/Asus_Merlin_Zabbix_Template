@@ -1,0 +1,1041 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>5.0</version>
+    <date>2021-01-02T03:01:23Z</date>
+    <groups>
+        <group>
+            <name>Asus</name>
+        </group>
+        <group>
+            <name>Templates</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>Asus Router</template>
+            <name>Asus Router</name>
+            <description>Asus router template</description>
+            <templates>
+                <template>
+                    <name>Template Module ICMP Ping</name>
+                </template>
+                <template>
+                    <name>Template Module Linux block devices by Zabbix agent</name>
+                </template>
+                <template>
+                    <name>Template Module Linux filesystems by Zabbix agent</name>
+                </template>
+                <template>
+                    <name>Template Module Linux network interfaces by Zabbix agent</name>
+                </template>
+                <template>
+                    <name>Template Module Zabbix agent</name>
+                </template>
+            </templates>
+            <groups>
+                <group>
+                    <name>Asus</name>
+                </group>
+                <group>
+                    <name>Templates</name>
+                </group>
+            </groups>
+            <applications>
+                <application>
+                    <name>CPU</name>
+                </application>
+                <application>
+                    <name>Memory</name>
+                </application>
+                <application>
+                    <name>Service</name>
+                </application>
+                <application>
+                    <name>System</name>
+                </application>
+                <application>
+                    <name>Temperature</name>
+                </application>
+            </applications>
+            <items>
+                <item>
+                    <name>Maximum number of processes</name>
+                    <key>kernel.maxproc</key>
+                    <delay>1h</delay>
+                    <history>7d</history>
+                    <description>It could be increased by using sysctrl utility or modifying file /etc/sysctl.conf.</description>
+                    <applications>
+                        <application>
+                            <name>System</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>DISCARD_UNCHANGED_HEARTBEAT</type>
+                            <params>1d</params>
+                        </step>
+                    </preprocessing>
+                </item>
+                <item>
+                    <name>HTTP Performance</name>
+                    <type>SIMPLE</type>
+                    <key>net.tcp.service.perf[http,,{$HTTP.STATUS.PORT}]</key>
+                    <delay>5m</delay>
+                    <history>7d</history>
+                    <status>DISABLED</status>
+                    <value_type>FLOAT</value_type>
+                    <units>s</units>
+                    <description>Web service HTTP performance check.</description>
+                    <applications>
+                        <application>
+                            <name>Service</name>
+                        </application>
+                    </applications>
+                    <triggers>
+                        <trigger>
+                            <expression>{max(#3)}=0</expression>
+                            <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+                            <recovery_expression>{max(#3)}&gt;0</recovery_expression>
+                            <name>HTTP service is down on {HOST.NAME}</name>
+                            <opdata>{ITEM.LASTVALUE1}</opdata>
+                            <status>DISABLED</status>
+                            <priority>HIGH</priority>
+                            <description>Check router web page.</description>
+                            <dependencies>
+                                <dependency>
+                                    <name>Unavailable by ICMP ping</name>
+                                    <expression>{Asus Router:icmpping.max(#3)}=0</expression>
+                                </dependency>
+                            </dependencies>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <name>HTTPS Performance</name>
+                    <type>SIMPLE</type>
+                    <key>net.tcp.service.perf[https,,{$HTTPS.STATUS.PORT}]</key>
+                    <delay>5m</delay>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <units>s</units>
+                    <description>Web service HTTPS performance check.</description>
+                    <applications>
+                        <application>
+                            <name>Service</name>
+                        </application>
+                    </applications>
+                    <triggers>
+                        <trigger>
+                            <expression>{max(#3)}=0</expression>
+                            <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+                            <recovery_expression>{max(#3)}&gt;0</recovery_expression>
+                            <name>HTTPS service is down on {HOST.NAME}</name>
+                            <opdata>{ITEM.LASTVALUE1}</opdata>
+                            <priority>HIGH</priority>
+                            <description>Check router web page.</description>
+                            <dependencies>
+                                <dependency>
+                                    <name>Unavailable by ICMP ping</name>
+                                    <expression>{Asus Router:icmpping.max(#3)}=0</expression>
+                                </dependency>
+                            </dependencies>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <name>SSH service is running</name>
+                    <type>SIMPLE</type>
+                    <key>net.tcp.service[ssh]</key>
+                    <history>1w</history>
+                    <applications>
+                        <application>
+                            <name>Service</name>
+                        </application>
+                    </applications>
+                    <triggers>
+                        <trigger>
+                            <expression>{max(#3)}=0</expression>
+                            <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+                            <recovery_expression>{max(#3)}=1</recovery_expression>
+                            <name>SSH service is down on {HOST.NAME}</name>
+                            <priority>AVERAGE</priority>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <name>NTP Performance</name>
+                    <type>SIMPLE</type>
+                    <key>net.udp.service.perf[ntp]</key>
+                    <delay>5m</delay>
+                    <history>1w</history>
+                    <value_type>FLOAT</value_type>
+                    <units>s</units>
+                    <description>NTP service performance check.</description>
+                    <applications>
+                        <application>
+                            <name>Service</name>
+                        </application>
+                    </applications>
+                    <triggers>
+                        <trigger>
+                            <expression>{max(#3)}=0</expression>
+                            <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+                            <recovery_expression>{max(#3)}&gt;0</recovery_expression>
+                            <name>NTP service is down on {HOST.NAME}</name>
+                            <opdata>{ITEM.LASTVALUE1}</opdata>
+                            <priority>AVERAGE</priority>
+                            <description>Check NTP service</description>
+                            <dependencies>
+                                <dependency>
+                                    <name>Unavailable by ICMP ping</name>
+                                    <expression>{Asus Router:icmpping.max(#3)}=0</expression>
+                                </dependency>
+                            </dependencies>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <name>Number of processes</name>
+                    <key>proc.num</key>
+                    <history>7d</history>
+                    <applications>
+                        <application>
+                            <name>System</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>Number of running processes</name>
+                    <key>proc.num[,,run]</key>
+                    <history>7d</history>
+                    <applications>
+                        <application>
+                            <name>System</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>HTTP Performance Average</name>
+                    <type>CALCULATED</type>
+                    <key>service.perf.avg.http</key>
+                    <delay>5m</delay>
+                    <history>2w</history>
+                    <value_type>FLOAT</value_type>
+                    <units>s</units>
+                    <params>avg(&quot;net.tcp.service.perf[http,,{$HTTP.STATUS.PORT}]&quot;,25m)</params>
+                    <description>Average of the 5 last values for the graph plotting.</description>
+                    <applications>
+                        <application>
+                            <name>Service</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>HTTPS Performance Average</name>
+                    <type>CALCULATED</type>
+                    <key>service.perf.avg.https</key>
+                    <delay>5m</delay>
+                    <history>2w</history>
+                    <value_type>FLOAT</value_type>
+                    <units>s</units>
+                    <params>avg(&quot;net.tcp.service.perf[https,,{$HTTPS.STATUS.PORT}]&quot;,25m)</params>
+                    <description>Average of the 5 last values for the graph plotting.</description>
+                    <applications>
+                        <application>
+                            <name>Service</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>NTP Performance Average</name>
+                    <type>CALCULATED</type>
+                    <key>service.perf.avg.ntp</key>
+                    <delay>5m</delay>
+                    <history>2w</history>
+                    <value_type>FLOAT</value_type>
+                    <units>s</units>
+                    <params>avg(&quot;net.udp.service.perf[ntp]&quot;,25m)</params>
+                    <description>Average of the 5 last values for the graph plotting.</description>
+                    <applications>
+                        <application>
+                            <name>Service</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>Load average (1m avg)</name>
+                    <key>system.cpu.load[all,avg1]</key>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <applications>
+                        <application>
+                            <name>CPU</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>Load average (5m avg)</name>
+                    <key>system.cpu.load[all,avg5]</key>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <applications>
+                        <application>
+                            <name>CPU</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>Load average (15m avg)</name>
+                    <key>system.cpu.load[all,avg15]</key>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <applications>
+                        <application>
+                            <name>CPU</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>Number of CPUs</name>
+                    <key>system.cpu.num</key>
+                    <delay>1h</delay>
+                    <history>7d</history>
+                    <applications>
+                        <application>
+                            <name>CPU</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>DISCARD_UNCHANGED_HEARTBEAT</type>
+                            <params>1d</params>
+                        </step>
+                    </preprocessing>
+                </item>
+                <item>
+                    <name>CPU utilization</name>
+                    <type>DEPENDENT</type>
+                    <key>system.cpu.util</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <units>%</units>
+                    <description>CPU utilization in %</description>
+                    <applications>
+                        <application>
+                            <name>CPU</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>JAVASCRIPT</type>
+                            <params>//Calculate utilization
+return (100 - value)</params>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>system.cpu.util[,idle]</key>
+                    </master_item>
+                    <triggers>
+                        <trigger>
+                            <expression>{min(5m)}&gt;{$CPU.UTIL.CRIT}</expression>
+                            <name>High CPU utilization (over {$CPU.UTIL.CRIT}% for 5m)</name>
+                            <opdata>Current utilization: {ITEM.LASTVALUE1}</opdata>
+                            <priority>WARNING</priority>
+                            <description>CPU utilization is too high. The system might be slow to respond.</description>
+                            <dependencies>
+                                <dependency>
+                                    <name>Load average is too high (per CPU load over {$LOAD_AVG_PER_CPU.MAX.WARN} for 5m)</name>
+                                    <expression>{Asus Router:system.cpu.load[all,avg1].min(5m)}/{Asus Router:system.cpu.num.last()}&gt;{$LOAD_AVG_PER_CPU.MAX.WARN}&#13;
+and {Asus Router:system.cpu.load[all,avg5].last()}&gt;0&#13;
+and {Asus Router:system.cpu.load[all,avg15].last()}&gt;0</expression>
+                                </dependency>
+                            </dependencies>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <name>CPU idle time</name>
+                    <key>system.cpu.util[,idle]</key>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <units>%</units>
+                    <description>The time the CPU has spent doing nothing.</description>
+                    <applications>
+                        <application>
+                            <name>CPU</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>System name</name>
+                    <key>system.hostname</key>
+                    <delay>1h</delay>
+                    <history>2w</history>
+                    <trends>0</trends>
+                    <value_type>CHAR</value_type>
+                    <description>System host name.</description>
+                    <inventory_link>NAME</inventory_link>
+                    <applications>
+                        <application>
+                            <name>System</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>DISCARD_UNCHANGED_HEARTBEAT</type>
+                            <params>1h</params>
+                        </step>
+                    </preprocessing>
+                    <triggers>
+                        <trigger>
+                            <expression>{diff()}=1 and {strlen()}&gt;0</expression>
+                            <name>System name has changed (new name: {ITEM.VALUE})</name>
+                            <priority>INFO</priority>
+                            <description>System name has changed. Ack to close.</description>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <name>System local time</name>
+                    <key>system.localtime</key>
+                    <history>7d</history>
+                    <units>unixtime</units>
+                    <description>System local time of the host.</description>
+                    <applications>
+                        <application>
+                            <name>System</name>
+                        </application>
+                    </applications>
+                    <triggers>
+                        <trigger>
+                            <expression>{fuzzytime({$SYSTEM.FUZZYTIME.MAX})}=0</expression>
+                            <name>System time is out of sync (diff with Zabbix server &gt; {$SYSTEM.FUZZYTIME.MAX}s)</name>
+                            <priority>WARNING</priority>
+                            <description>The host system time is different from the Zabbix server time.</description>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <name>Connected clients</name>
+                    <key>system.run[arp -a | awk '$4!=&quot;&lt;incomplete&gt;&quot;' | wc -l]</key>
+                    <delay>5m</delay>
+                    <history>1w</history>
+                    <description>Connected clients according to ARP table.</description>
+                    <applications>
+                        <application>
+                            <name>Service</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>DHCP Leases</name>
+                    <key>system.run[cat /var/lib/misc/dnsmasq.leases | wc -l]</key>
+                    <delay>5m</delay>
+                    <history>1w</history>
+                    <description>DHCP Leases</description>
+                    <applications>
+                        <application>
+                            <name>Service</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>Temperature Wireless 2.4GHz</name>
+                    <key>system.run[wl -i eth5 phy_tempsense | awk '{print $1/2+20}']</key>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <units>°C</units>
+                    <description>Wireless 2.4GHz Temperature</description>
+                    <applications>
+                        <application>
+                            <name>Temperature</name>
+                        </application>
+                    </applications>
+                    <triggers>
+                        <trigger>
+                            <expression>{last(#1)}&gt;=65 and {last(#2)}&gt;=59</expression>
+                            <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+                            <recovery_expression>{last(#1)}&lt;65 and {last(#2)}&lt;59</recovery_expression>
+                            <name>Wireless 2.4GHz high temperature</name>
+                            <opdata>{ITEM.LASTVALUE1}</opdata>
+                            <priority>AVERAGE</priority>
+                            <description>Wireless 2.4GHz high temperature</description>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <name>Temperature Wireless 5.0GHz</name>
+                    <key>system.run[wl -i eth6 phy_tempsense | awk '{print $1/2+20}']</key>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <units>°C</units>
+                    <description>Wireless 5.0GHz Temperature</description>
+                    <applications>
+                        <application>
+                            <name>Temperature</name>
+                        </application>
+                    </applications>
+                    <triggers>
+                        <trigger>
+                            <expression>{last(#1)}&gt;=65 and {last(#2)}&gt;=59</expression>
+                            <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+                            <recovery_expression>{last(#1)}&lt;65 and {last(#2)}&lt;59</recovery_expression>
+                            <name>Wireless 5.0Hz high temperature</name>
+                            <opdata>{ITEM.LASTVALUE1}</opdata>
+                            <priority>AVERAGE</priority>
+                            <description>Wireless 5.0Hz high temperature</description>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <name>Operating system</name>
+                    <key>system.sw.os</key>
+                    <delay>1h</delay>
+                    <history>2w</history>
+                    <trends>0</trends>
+                    <value_type>CHAR</value_type>
+                    <inventory_link>OS</inventory_link>
+                    <applications>
+                        <application>
+                            <name>System</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>DISCARD_UNCHANGED_HEARTBEAT</type>
+                            <params>1d</params>
+                        </step>
+                    </preprocessing>
+                    <triggers>
+                        <trigger>
+                            <expression>{diff()}=1 and {strlen()}&gt;0</expression>
+                            <recovery_mode>NONE</recovery_mode>
+                            <name>Operating system description has changed</name>
+                            <priority>INFO</priority>
+                            <description>Operating system description has changed. Possible reasons that system has been updated or replaced. Ack to close.</description>
+                            <manual_close>YES</manual_close>
+                            <dependencies>
+                                <dependency>
+                                    <name>System name has changed (new name: {ITEM.VALUE})</name>
+                                    <expression>{Asus Router:system.hostname.diff()}=1 and {Asus Router:system.hostname.strlen()}&gt;0</expression>
+                                </dependency>
+                            </dependencies>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <name>System uptime</name>
+                    <key>system.uptime</key>
+                    <delay>5m;5m/1-7,00:00-03:59;5m/1-7,04:05-24:00</delay>
+                    <history>1w</history>
+                    <units>s</units>
+                    <description>System uptime</description>
+                    <applications>
+                        <application>
+                            <name>Status</name>
+                        </application>
+                    </applications>
+                    <triggers>
+                        <trigger>
+                            <expression>{last()}&lt;10m</expression>
+                            <name>{HOST.NAME} has been restarted (uptime &lt; 10m)</name>
+                            <priority>WARNING</priority>
+                            <description>The host uptime is less than 10 minutes</description>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <name>Temperature CPU</name>
+                    <key>vfs.file.contents[/sys/devices/virtual/thermal/thermal_zone0/temp]</key>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <units>°C</units>
+                    <description>CPU Temperature</description>
+                    <applications>
+                        <application>
+                            <name>Temperature</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>MULTIPLIER</type>
+                            <params>0.001</params>
+                        </step>
+                    </preprocessing>
+                    <triggers>
+                        <trigger>
+                            <expression>{last(#1)}&gt;={$CPU.TOP.TEMP}</expression>
+                            <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+                            <recovery_expression>{last(#1)}&lt;{$CPU.TOP.TEMP}</recovery_expression>
+                            <name>ALERT CPU High temperature</name>
+                            <opdata>{ITEM.LASTVALUE1}</opdata>
+                            <priority>HIGH</priority>
+                            <description>High CPU temperature</description>
+                        </trigger>
+                        <trigger>
+                            <expression>{last(#1)}&gt;={$CPU.HIGH.TEMP}</expression>
+                            <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+                            <recovery_expression>{last(#1)}&lt;{$CPU.HIGH.TEMP}</recovery_expression>
+                            <name>CPU High temperature</name>
+                            <opdata>{ITEM.LASTVALUE1}</opdata>
+                            <priority>AVERAGE</priority>
+                            <description>High CPU temperature</description>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <name>Memory available</name>
+                    <key>vm.memory.size[available]</key>
+                    <history>7d</history>
+                    <units>B</units>
+                    <description>Available memory, in Linux, available = free + buffers + cache. On other platforms calculation may vary. See also: https://www.zabbix.com/documentation/current/manual/appendix/items/vm.memory.size_params</description>
+                    <applications>
+                        <application>
+                            <name>Memory</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>Memory WebUI Free</name>
+                    <key>vm.memory.size[free]</key>
+                    <history>7d</history>
+                    <units>B</units>
+                    <description>Free memory in Bytes.&#13;
+Zabbix agent collects RAM information from &quot;/proc/meminfo&quot;.</description>
+                    <applications>
+                        <application>
+                            <name>Memory</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>Memory utilization</name>
+                    <key>vm.memory.size[pavailable]</key>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <units>%</units>
+                    <description>Memory used percentage is calculated as (100-pavailable)</description>
+                    <applications>
+                        <application>
+                            <name>Memory</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>JAVASCRIPT</type>
+                            <params>return (100-value);</params>
+                        </step>
+                    </preprocessing>
+                    <triggers>
+                        <trigger>
+                            <expression>{min(5m)}&gt;{$MEMORY.UTIL.MAX}</expression>
+                            <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+                            <recovery_expression>{min(5m)}&lt;{$MEMORY.UTIL.MAX}</recovery_expression>
+                            <name>High memory utilization ( &gt;{$MEMORY.UTIL.MAX}% for 5m)</name>
+                            <priority>AVERAGE</priority>
+                            <description>The system is running out of free memory.</description>
+                            <dependencies>
+                                <dependency>
+                                    <name>Lack of available memory ( &lt; {$MEMORY.AVAILABLE.MIN} of {ITEM.VALUE2})</name>
+                                    <expression>{Asus Router:vm.memory.size[available].min(5m)}&lt;={$MEMORY.AVAILABLE.MIN} and {Asus Router:vm.memory.size[total].last()}&gt;0</expression>
+                                    <recovery_expression>{Asus Router:vm.memory.size[available].min(5m)}&gt;={$MEMORY.AVAILABLE.MIN} and {Asus Router:vm.memory.size[total].last()}&gt;0</recovery_expression>
+                                </dependency>
+                            </dependencies>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <name>Memory total</name>
+                    <key>vm.memory.size[total]</key>
+                    <delay>1h</delay>
+                    <history>7d</history>
+                    <units>B</units>
+                    <description>Total memory in Bytes.&#13;
+Zabbix agent collects RAM information from &quot;/proc/meminfo&quot;.&#13;
+Check if your Asus router real total memory is this item's value captured by the agent.</description>
+                    <applications>
+                        <application>
+                            <name>Memory</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>Memory WebUI Total</name>
+                    <type>DEPENDENT</type>
+                    <key>vm.memory.size[webui,total]</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <units>B</units>
+                    <description>Total memory in Bytes displayed in WEB UI.&#13;
+AsusWRT WebUI collects RAM information from &quot;/proc/meminfo&quot; and rounds up the &quot;Total&quot; amount of RAM to the nearest power of two.&#13;
+Check if your routers real total memory is this items value captured by the agent.&#13;
+If not, try ajusting in your host's preprocessing tab.</description>
+                    <applications>
+                        <application>
+                            <name>Memory</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>JAVASCRIPT</type>
+                            <params>var size = [4,8,16,32,64,128,256,512,1024];
+    var memSize = 0;
+    for (var i = 0; i &lt;= 8; i++){
+        memSize = size[i] * 1024 * 1024
+        if(memSize &gt; value){
+            return memSize;
+            break;
+	    }
+	}</params>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>vm.memory.size[total]</key>
+                    </master_item>
+                </item>
+                <item>
+                    <name>Memory WebUI Used</name>
+                    <type>CALCULATED</type>
+                    <key>vm.memory.size[webui,used]</key>
+                    <history>7d</history>
+                    <units>B</units>
+                    <params>last(&quot;vm.memory.size[webui,total]&quot;)-&#13;
+last(&quot;vm.memory.size[free]&quot;)</params>
+                    <description>Used memory in Bytes.&#13;
+Webui used = Webui total - Webui free</description>
+                    <applications>
+                        <application>
+                            <name>Memory</name>
+                        </application>
+                    </applications>
+                </item>
+            </items>
+            <macros>
+                <macro>
+                    <macro>{$CPU.HIGH.TEMP}</macro>
+                    <value>79</value>
+                    <description>High temperature threashold</description>
+                </macro>
+                <macro>
+                    <macro>{$CPU.TOP.TEMP}</macro>
+                    <value>82</value>
+                    <description>Higher temperature threashold</description>
+                </macro>
+                <macro>
+                    <macro>{$CPU.UTIL.CRIT}</macro>
+                    <value>90</value>
+                </macro>
+                <macro>
+                    <macro>{$HTTP.STATUS.PORT}</macro>
+                    <value>80</value>
+                    <description>Define here your HTTP port</description>
+                </macro>
+                <macro>
+                    <macro>{$HTTPS.STATUS.PORT}</macro>
+                    <value>443</value>
+                    <description>Define here your HTTPS port</description>
+                </macro>
+                <macro>
+                    <macro>{$IF.ERRORS.WARN}</macro>
+                    <value>2</value>
+                </macro>
+                <macro>
+                    <macro>{$IFCONTROL}</macro>
+                    <value>1</value>
+                </macro>
+                <macro>
+                    <macro>{$KERNEL.MAXPROC.MIN}</macro>
+                    <value>1024</value>
+                </macro>
+                <macro>
+                    <macro>{$LOAD_AVG_PER_CPU.MAX.WARN}</macro>
+                    <value>1.5</value>
+                    <description>Load per CPU considered sustainable. Tune if needed.</description>
+                </macro>
+                <macro>
+                    <macro>{$MEMORY.AVAILABLE.MIN}</macro>
+                    <value>20M</value>
+                    <description>This macro is used as a threshold in memory available trigger.</description>
+                </macro>
+                <macro>
+                    <macro>{$MEMORY.UTIL.MAX}</macro>
+                    <value>90</value>
+                    <description>This macro is used as a threshold in memory utilization trigger.</description>
+                </macro>
+                <macro>
+                    <macro>{$NET.IF.IFNAME.MATCHES}</macro>
+                    <value>^.*$</value>
+                </macro>
+                <macro>
+                    <macro>{$NET.IF.IFNAME.NOT_MATCHES}</macro>
+                    <value>(^Software Loopback Interface|^NULL[0-9.]*$|^[Ll]o[0-9.]*$|^[Ss]ystem$|^Nu[0-9.]*$|^veth[0-9a-z]+$|docker[0-9]+|br-[a-z0-9]{12})</value>
+                    <description>Filter out loopbacks, nulls, docker veth links and docker0 bridge by default</description>
+                </macro>
+                <macro>
+                    <macro>{$SYSTEM.FUZZYTIME.MAX}</macro>
+                    <value>60</value>
+                </macro>
+                <macro>
+                    <macro>{$VFS.DEV.DEVNAME.NOT_MATCHES}</macro>
+                    <value>^(mtdblock[0-9]*|loop[0-9]*|sd[a-z][0-9]+|nbd[0-9]+|sr[0-9]+|fd[0-9]+|dm-[0-9]+|ram[0-9]+|ploop[a-z0-9]+|md[0-9]*|hcp[0-9]*|zram[0-9]*)</value>
+                    <description>This macro is used in block devices discovery. Can be overridden on the host or linked template level</description>
+                </macro>
+            </macros>
+        </template>
+    </templates>
+    <triggers>
+        <trigger>
+            <expression>{Asus Router:proc.num.last()}/{Asus Router:kernel.maxproc.last()}*100&gt;80</expression>
+            <name>Getting closer to process limit (over 80% used)</name>
+            <opdata>{ITEM.LASTVALUE1} active, {ITEM.LASTVALUE2} limit.</opdata>
+            <priority>WARNING</priority>
+        </trigger>
+        <trigger>
+            <expression>{Asus Router:vm.memory.size[available].min(5m)}&lt;={$MEMORY.AVAILABLE.MIN} and {Asus Router:vm.memory.size[total].last()}&gt;0</expression>
+            <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+            <recovery_expression>{Asus Router:vm.memory.size[available].min(5m)}&gt;={$MEMORY.AVAILABLE.MIN} and {Asus Router:vm.memory.size[total].last()}&gt;0</recovery_expression>
+            <name>Lack of available memory ( &lt; {$MEMORY.AVAILABLE.MIN} of {ITEM.VALUE2})</name>
+            <opdata>Available: {ITEM.LASTVALUE1}, total: {ITEM.LASTVALUE2}</opdata>
+            <priority>AVERAGE</priority>
+        </trigger>
+        <trigger>
+            <expression>{Asus Router:system.cpu.load[all,avg1].min(5m)}/{Asus Router:system.cpu.num.last()}&gt;{$LOAD_AVG_PER_CPU.MAX.WARN}&#13;
+and {Asus Router:system.cpu.load[all,avg5].last()}&gt;0&#13;
+and {Asus Router:system.cpu.load[all,avg15].last()}&gt;0</expression>
+            <name>Load average is too high (per CPU load over {$LOAD_AVG_PER_CPU.MAX.WARN} for 5m)</name>
+            <opdata>Load averages(1m 5m 15m): ({ITEM.LASTVALUE1} {ITEM.LASTVALUE3} {ITEM.LASTVALUE4}), # of CPUs: {ITEM.LASTVALUE2}</opdata>
+            <priority>AVERAGE</priority>
+            <description>Per CPU load average is too high. Your system may be slow to respond.</description>
+        </trigger>
+    </triggers>
+    <graphs>
+        <graph>
+            <name>CPU utilization</name>
+            <ymin_type_1>FIXED</ymin_type_1>
+            <ymax_type_1>FIXED</ymax_type_1>
+            <graph_items>
+                <graph_item>
+                    <drawtype>GRADIENT_LINE</drawtype>
+                    <color>1A7C11</color>
+                    <item>
+                        <host>Asus Router</host>
+                        <key>system.cpu.util</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>DHCP x Connected</name>
+            <ymin_type_1>FIXED</ymin_type_1>
+            <graph_items>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <drawtype>BOLD_LINE</drawtype>
+                    <color>199C0D</color>
+                    <calc_fnc>ALL</calc_fnc>
+                    <item>
+                        <host>Asus Router</host>
+                        <key>system.run[cat /var/lib/misc/dnsmasq.leases | wc -l]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <drawtype>GRADIENT_LINE</drawtype>
+                    <color>F63100</color>
+                    <calc_fnc>ALL</calc_fnc>
+                    <item>
+                        <host>Asus Router</host>
+                        <key>system.run[arp -a | awk '$4!=&quot;&lt;incomplete&gt;&quot;' | wc -l]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>Memory usage</name>
+            <show_triggers>NO</show_triggers>
+            <ymin_type_1>FIXED</ymin_type_1>
+            <graph_items>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>FF4000</color>
+                    <item>
+                        <host>Asus Router</host>
+                        <key>vm.memory.size[total]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <drawtype>GRADIENT_LINE</drawtype>
+                    <color>199C0D</color>
+                    <item>
+                        <host>Asus Router</host>
+                        <key>vm.memory.size[available]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>3</sortorder>
+                    <drawtype>DASHED_LINE</drawtype>
+                    <color>2774A4</color>
+                    <yaxisside>RIGHT</yaxisside>
+                    <item>
+                        <host>Asus Router</host>
+                        <key>vm.memory.size[pavailable]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>Memory WEBUI</name>
+            <ymin_type_1>FIXED</ymin_type_1>
+            <graph_items>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>FF0000</color>
+                    <item>
+                        <host>Asus Router</host>
+                        <key>vm.memory.size[webui,total]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <drawtype>GRADIENT_LINE</drawtype>
+                    <color>FB8C00</color>
+                    <item>
+                        <host>Asus Router</host>
+                        <key>vm.memory.size[webui,used]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>3</sortorder>
+                    <drawtype>BOLD_LINE</drawtype>
+                    <color>2774A4</color>
+                    <item>
+                        <host>Asus Router</host>
+                        <key>vm.memory.size[free]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>Processes</name>
+            <graph_items>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <drawtype>BOLD_LINE</drawtype>
+                    <color>1A7C11</color>
+                    <item>
+                        <host>Asus Router</host>
+                        <key>proc.num</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <drawtype>BOLD_LINE</drawtype>
+                    <color>2774A4</color>
+                    <item>
+                        <host>Asus Router</host>
+                        <key>proc.num[,,run]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>System load</name>
+            <ymin_type_1>FIXED</ymin_type_1>
+            <graph_items>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <drawtype>BOLD_LINE</drawtype>
+                    <color>1A7C11</color>
+                    <item>
+                        <host>Asus Router</host>
+                        <key>system.cpu.load[all,avg1]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <drawtype>BOLD_LINE</drawtype>
+                    <color>2774A4</color>
+                    <item>
+                        <host>Asus Router</host>
+                        <key>system.cpu.load[all,avg5]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>3</sortorder>
+                    <drawtype>BOLD_LINE</drawtype>
+                    <color>F63100</color>
+                    <item>
+                        <host>Asus Router</host>
+                        <key>system.cpu.load[all,avg15]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>Temperature</name>
+            <yaxismax>83</yaxismax>
+            <ymin_type_1>FIXED</ymin_type_1>
+            <ymax_type_1>FIXED</ymax_type_1>
+            <graph_items>
+                <graph_item>
+                    <drawtype>BOLD_LINE</drawtype>
+                    <color>B71C1C</color>
+                    <item>
+                        <host>Asus Router</host>
+                        <key>vfs.file.contents[/sys/devices/virtual/thermal/thermal_zone0/temp]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <drawtype>BOLD_LINE</drawtype>
+                    <color>A1887F</color>
+                    <item>
+                        <host>Asus Router</host>
+                        <key>system.run[wl -i eth5 phy_tempsense | awk '{print $1/2+20}']</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <drawtype>BOLD_LINE</drawtype>
+                    <color>2774A4</color>
+                    <item>
+                        <host>Asus Router</host>
+                        <key>system.run[wl -i eth6 phy_tempsense | awk '{print $1/2+20}']</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>WEB x NTP Perfomance</name>
+            <show_triggers>NO</show_triggers>
+            <ymin_type_1>FIXED</ymin_type_1>
+            <graph_items>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <drawtype>GRADIENT_LINE</drawtype>
+                    <color>5D4037</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Asus Router</host>
+                        <key>net.tcp.service.perf[https,,{$HTTPS.STATUS.PORT}]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <drawtype>BOLD_LINE</drawtype>
+                    <color>90CAF9</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Asus Router</host>
+                        <key>net.udp.service.perf[ntp]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+    </graphs>
+</zabbix_export>
