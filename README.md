@@ -48,7 +48,6 @@
   <LI>CPU idle time
   <LI>CPU idle time: CPU utilization
   <LI>DHCP Leases
-  <LI>Template Module Zabbix agent: Host name of Zabbix agent running
   <LI>HTTP Performance
   <LI>HTTP Performance Average
   <LI>HTTPS Performance
@@ -60,11 +59,14 @@
   <LI>Load average (5m avg)
   <LI>Load average (15m avg)
   <LI>Maximum number of processes
-  <LI>Memory available
-  <LI>Memory total
-  <LI>Memory utilization
+  <LI>Template Module Linux memory by Zabbix agent: Total memory
+  <LI>Template Module Linux memory by Zabbix agent: Memory utilization
+  <LI>Template Module Linux memory by Zabbix agent: Available memory
+  <LI>Template Module Linux memory by Zabbix agent: Total swap space
+  <LI>Template Module Linux memory by Zabbix agent: Free swap space in %
+  <LI>Template Module Linux memory by Zabbix agent: Free swap space
   <LI>Memory WebUI Free
-  <LI>Memory total: Memory WebUI Total
+  <LI>Memory WebUI Total
   <LI>Memory WebUI Used
   <LI>NTP Performance
   <LI>NTP Performance Average
@@ -72,19 +74,25 @@
   <LI>Number of processes
   <LI>Number of running processes
   <LI>Operating system
-  <LI>SSH service is running
+  <LI>Template App SSH Service: SSH service is running
   <LI>System local time
   <LI>System name
   <LI>System uptime
+  <LI>System description
   <LI>Temperature CPU
   <LI>Temperature Wireless 2.4GHz
   <LI>Temperature Wireless 5.0GHz
   <LI>Template Module Zabbix agent: Version of Zabbix agent running
   <LI>Template Module Zabbix agent: Zabbix agent availability
   <LI>Template Module Zabbix agent: Zabbix agent ping
-  <LI><i>Network discovery items</i>
-  <LI><i>Mounted filesystem discovery</i>
-  <LI><i>Block devices discovery</i>
+  <LI>Template Module Zabbix agent: Host name of Zabbix agent running
+  <LI>Internet IPv4
+  <LI>Internet IPv6
+  <i>
+    <LI>Network discovery items
+    <LI>Mounted filesystem discovery
+    <LI>Block devices discovery
+  </i>
 </OL>
 
 
