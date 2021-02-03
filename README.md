@@ -12,7 +12,7 @@
   <LI>Entware installed</LI>
   <LI>Zabbix agent installed</LI>
       <UL>
-        <LI>Agent installation: <a href=https://www.snbforums.com/threads/rt-ac86u-with-zabbix-agent.64343/#post-587787>SNB Forum topic</a></LI>
+        <LI>Agent installation: <a href=https://github.com/diasdmhub/Zabbix_agent_Asus_Merlin>Zabbix Agent installation script</a></LI>
       </UL>
   <LI>Zabbix agent configuration</LI>
       <UL>
