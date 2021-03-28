@@ -17,8 +17,10 @@
   <LI>Zabbix agent configuration</LI>
       <UL>
         <LI>Configure file with your router parameters</LI>
-        <LI>Add <code>AllowRoot=1</code> parameter<i> (necessary for custom checks)</i></LI>
+        <LI>Add <code>AllowKey=system.run[*]</code> parameter<i> (necessary for custom checks)</i></LI>
+        <LI>Add <code>AllowRoot=1</code> parameter<i> (necessary since no Zabbix user is created)</i></LI>
         <small><i><a href=https://www.zabbix.com/forum/zabbix-troubleshooting-and-problems/402023-zabbix-agent-system-run>Zabbix forum discussion</a></i></small>
+        <LI>You can try my <a href=https://github.com/diasdmhub/Zabbix_agent_Asus_Merlin>Zabbix Agent installation script</a></LI>
       </UL>
 </UL>
 
