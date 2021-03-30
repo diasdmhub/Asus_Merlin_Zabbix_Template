@@ -43,7 +43,7 @@ https://github.com/diasdmhub/Zabbix_Template_Asus_Merlin</description>
             </templates>
             <groups>
                 <group>
-                    <name>Casa</name>
+                    <name>Asus</name>
                 </group>
                 <group>
                     <name>Templates</name>
