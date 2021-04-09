@@ -36,10 +36,12 @@
 
 <BR><strong>LINKED TEMPLATES</strong>
 <OL>
+  <LI>Template App SSH Service
   <LI>Template Module ICMP Ping
   <LI>Template Module Linux block devices by Zabbix agent
   <LI>Template Module Linux filesystems by Zabbix agent
   <LI>Template Module Linux network interfaces by Zabbix agent
+  <LI>Template Module Linux memory by Zabbix agent
   <LI>Template Module Zabbix agent
 </OL>
 
