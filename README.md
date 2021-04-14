@@ -36,7 +36,7 @@
 
 <BR><strong>LINKED TEMPLATES</strong>
 <OL>
-  <LI>SSH Service
+  <LI>SSH Service (<i>passive agent only</i>)
   <LI>ICMP Ping (<i>passive agent only</i>)
   <LI>Linux block devices by Zabbix agent
   <LI>Linux filesystems by Zabbix agent
