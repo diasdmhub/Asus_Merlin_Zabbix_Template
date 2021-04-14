@@ -234,4 +234,5 @@
 <strong><i>
   This template was tested only with Asus RT-AC86U / RT-AC87U / RT-AX86U router running a Asus Merlin firmware.
   It should work with other Asus routers as well.
+  Feedbacks are welcome.
 </i></strong>
