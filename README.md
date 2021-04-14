@@ -11,17 +11,17 @@
   <LI>Asus WRT Router with Merlin firmware</LI>
   <LI>Entware installed</LI>
   <LI>Zabbix agent installed</LI>
-      <UL>
-        <LI>Agent installation: <a href=https://github.com/diasdmhub/Zabbix_agent_Asus_Merlin>Zabbix Agent installation script</a></LI>
-      </UL>
-  <LI>Zabbix agent configuration</LI>
-      <UL>
-        <LI>Configure file with your router parameters</LI>
-        <LI>Add <code>AllowKey=system.run[*]</code> parameter<i> (necessary for custom checks)</i></LI>
-        <LI>Add <code>AllowRoot=1</code> parameter<i> (necessary since no Zabbix user is created)</i></LI>
-        <small><i><a href=https://www.zabbix.com/forum/zabbix-troubleshooting-and-problems/402023-zabbix-agent-system-run>Zabbix forum discussion</a></i></small>
-        <LI>You can try my <a href=https://github.com/diasdmhub/Zabbix_agent_Asus_Merlin>Zabbix Agent installation script</a></LI>
-      </UL>
+    <UL>
+      <LI>You can try my <a href=https://github.com/diasdmhub/Zabbix_agent_Asus_Merlin>Zabbix Agent installation script</a></LI>
+    </UL>
+  <LI>Zabbix agent configuration file</LI>
+    <UL>
+      <LI>"Server=" with your router IP/Hostname</LI>
+      <LI>Add <code>AllowKey=system.run[*]</code> parameter<i> (necessary for custom checks)</i></LI>
+      <LI>Add <code>AllowRoot=1</code> parameter<i> (necessary since no Zabbix user is created)</i></LI>
+      <small><i><a href=https://www.zabbix.com/forum/zabbix-troubleshooting-and-problems/402023-zabbix-agent-system-run>Zabbix forum discussion</a></i></small>
+      <LI>You can try my <a href=https://github.com/diasdmhub/Zabbix_agent_Asus_Merlin>Zabbix Agent installation script</a></LI>
+    </UL>
 </UL>
 
 
@@ -31,73 +31,241 @@
   <LI>Triggers</LI>
   <LI>Graphs</LI>
   <LI>Discovery rules</LI>
+  <LI>WEB scenarios</LI>
 </UL>
 
 
 <BR><strong>LINKED TEMPLATES</strong>
 <OL>
-  <LI>Template App SSH Service
-  <LI>Template Module ICMP Ping
-  <LI>Template Module Linux block devices by Zabbix agent
-  <LI>Template Module Linux filesystems by Zabbix agent
-  <LI>Template Module Linux network interfaces by Zabbix agent
-  <LI>Template Module Linux memory by Zabbix agent
-  <LI>Template Module Zabbix agent
+  <LI>SSH Service
+  <LI>ICMP Ping (passive agent only)
+  <LI>Linux block devices by Zabbix agent
+  <LI>Linux filesystems by Zabbix agent
+  <LI>Linux network interfaces by Zabbix agent
+  <LI>Linux memory by Zabbix agent
+  <LI>Zabbix agent
 </OL>
 
 
 <BR><strong>AVALIABLE ITEMS</strong>
-<OL>
-  <LI>Connected clients
-  <LI>CPU idle time
-  <LI>CPU idle time: CPU utilization
-  <LI>DHCP Leases
-  <LI>HTTP Performance
-  <LI>HTTP Performance Average
-  <LI>HTTPS Performance
-  <LI>HTTPS Performance Average
-  <LI>Template Module ICMP Ping: ICMP loss
-  <LI>Template Module ICMP Ping: ICMP ping
-  <LI>Template Module ICMP Ping: ICMP response time
-  <LI>Load average (1m avg)
-  <LI>Load average (5m avg)
-  <LI>Load average (15m avg)
-  <LI>Maximum number of processes
-  <LI>Template Module Linux memory by Zabbix agent: Total memory
-  <LI>Template Module Linux memory by Zabbix agent: Memory utilization
-  <LI>Template Module Linux memory by Zabbix agent: Available memory
-  <LI>Template Module Linux memory by Zabbix agent: Total swap space
-  <LI>Template Module Linux memory by Zabbix agent: Free swap space in %
-  <LI>Template Module Linux memory by Zabbix agent: Free swap space
-  <LI>Memory WebUI Free
-  <LI>Memory WebUI Total
-  <LI>Memory WebUI Used
-  <LI>NTP Performance
-  <LI>NTP Performance Average
-  <LI>Number of CPUs
-  <LI>Number of processes
-  <LI>Number of running processes
-  <LI>Operating system
-  <LI>Template App SSH Service: SSH service is running
-  <LI>System local time
-  <LI>System name
-  <LI>System uptime
-  <LI>System description
-  <LI>Temperature CPU
-  <LI>Temperature Wireless 2.4GHz
-  <LI>Temperature Wireless 5.0GHz
-  <LI>Template Module Zabbix agent: Version of Zabbix agent running
-  <LI>Template Module Zabbix agent: Zabbix agent availability
-  <LI>Template Module Zabbix agent: Zabbix agent ping
-  <LI>Template Module Zabbix agent: Host name of Zabbix agent running
-  <LI>Internet IPv4
-  <LI>Internet IPv6
-  <i>
-    <LI>Network discovery items
-    <LI>Mounted filesystem discovery
-    <LI>Block devices discovery
-  </i>
-</OL>
+
+<!--
+<style>
+  table {
+        font-family: inherit;
+        border-collapse: collapse;
+        width: 100%;
+  }
+  td, th {
+	    border: 1px solid #dddddd;
+	    text-align: left;
+	    padding: 8px;
+  }
+  tr:nth-child(even) {
+        background-color: #dddddd;
+  }
+</style>
+-->
+
+<table>
+  <tr>
+        <th>Asus Router by Zabbix Agent</th>
+        <th>Asus Router by Zabbix Agent active</th>
+  </tr>
+  <tr>
+	    <td>Connected clients</td>
+	  	<td>Connected clients</td>
+	</tr>
+  <tr>    
+		  <td>DHCP Leases</td>
+	  	<td>DHCP Leases</td>
+	</tr>
+  <tr>    
+		  <td>HTTP Performance</td>
+	  	<td>HTTP Performance</td>
+	</tr>
+  <tr>    
+	  	<td>HTTP Performance Average</td>
+	    <td>HTTP Performance Average</td>
+	</tr>
+  <tr>	
+		  <td>HTTPS Performance</td>
+	  	<td>HTTPS Performance</td>
+	</tr>
+  <tr>    
+	  	<td>HTTPS Performance Average</td>
+	  	<td>HTTPS Performance Average</td>
+	</tr>
+  <tr>	
+	    <td>NTP Performance</td>
+	  	<td>NTP Performance</td>
+	</tr>
+  <tr>	
+	    <td>NTP Performance Average</td>
+	  	<td>NTP Performance Average</td>
+	</tr>
+  <tr>	
+	    <td>SSH Service: SSH service is running</td>
+	  	<td>SSH Service: SSH service is running</td>
+	</tr>
+  <tr>	
+	    <td>Internet IPv4</td>
+	  	<td>Internet IPv4</td>
+	</tr>
+  <tr>	
+	    <td>Internet IPv6</td>
+	  	<td>Internet IPv6</td>
+	</tr>
+  <tr>    
+	  	<td>Linux memory by Zabbix agent: Available memory</td>
+	  	<td>Linux memory by Zabbix agent: Available memory</td>
+	</tr>
+  <tr>	
+	    <td>Linux memory by Zabbix agent: Available memory in %</td>
+	  	<td>Linux memory by Zabbix agent: Available memory in %</td>
+	</tr>
+  <tr>	
+	    <td>Linux memory by Zabbix agent: Available memory in %: Memory utilization</td>
+	  	<td>Linux memory by Zabbix agent: Available memory in %: Memory utilization</td>
+	</tr>
+  <tr>	
+	    <td>Linux memory by Zabbix agent: Free swap space</td>
+		  <td>Linux memory by Zabbix agent: Free swap space</td>
+	</tr>
+  <tr>    
+	  	<td>Linux memory by Zabbix agent: Free swap space in %</td>
+	  	<td>Linux memory by Zabbix agent: Free swap space in %</td>
+	</tr>
+  <tr>	
+	    <td>Linux memory by Zabbix agent: Total memory</td>
+	  	<td>Linux memory by Zabbix agent: Total memory</td>
+	</tr>
+  <tr>	
+	    <td>Linux memory by Zabbix agent: Total swap space</td>
+	  	<td>Linux memory by Zabbix agent: Total swap space</td>
+	</tr>
+  <tr>	
+	    <td>Memory WebUI Free</td>
+	  	<td>Memory WebUI Free</td>
+	</tr>
+  <tr>	
+	    <td>Total memory: Memory WebUI Total</td>
+	  	<td>Total memory: Memory WebUI Total</td>
+	</tr>
+  <tr>	
+	    <td>Memory WebUI Used</td>
+	  	<td>Memory WebUI Used</td>
+	</tr>
+  <tr>	
+	    <td>CPU idle time</td>
+	  	<td>CPU idle time</td>
+	</tr>
+  <tr>	
+	    <td>CPU idle time: CPU utilization</td>
+	  	<td>CPU idle time: CPU utilization</td>
+	</tr>
+  <tr>	
+	    <td>Number of CPUs</td>
+	  	<td>Number of CPUs</td>
+	</tr>
+  <tr>	
+	    <td>Load average (15m avg)</td>
+	  	<td>Load average (15m avg)</td>
+	</tr>
+  <tr>	
+	    <td>Load average (5m avg)</td>
+	  	<td>Load average (5m avg)</td>
+	</tr>
+  <tr>	
+	    <td>Load average (1m avg)</td>
+	  	<td>Load average (1m avg)</td>
+	</tr>
+  <tr>	
+	    <td>Maximum number of processes</td>
+	  	<td>Maximum number of processes</td>
+	</tr>
+  <tr>	
+	    <td>Number of processes</td>
+	  	<td>Number of processes</td>
+	</tr>
+  <tr>	
+	    <td>Number of running processes</td>
+	  	<td>Number of running processes</td>
+	</tr>
+  <tr>	
+	    <td>Operating system</td>
+	  	<td>Operating system</td>
+	</tr>
+  <tr>	
+	    <td>System boot time</td>
+	  	<td>System boot time</td>
+	</tr>
+  <tr>	
+	    <td>System description</td>
+	  	<td>System description</td>
+	</tr>
+  <tr>	
+	    <td>System local time</td>
+	  	<td>System local time</td>
+	</tr>
+  <tr>	
+	    <td>System name</td>
+	  	<td>System name</td>
+	</tr>
+  <tr>	
+	    <td>System uptime</td>
+	  	<td>System uptime</td>
+	</tr>
+  <tr>	
+	    <td>Temperature CPU</td>
+	  	<td>Temperature CPU</td>
+	</tr>
+  <tr>	
+	    <td>Temperature Wireless 2.4GHz</td>
+	  	<td>Temperature Wireless 2.4GHz</td>
+	</tr>
+  <tr>	
+	    <td>Temperature Wireless 5.0GHz</td>
+	  	<td>Temperature Wireless 5.0GHz</td>
+	</tr>
+  <tr>	
+	    <td>Zabbix agent: Host name of Zabbix agent running</td>
+	  	<td>Zabbix agent: Host name of Zabbix agent running</td>
+	</tr>
+  <tr>	
+	    <td>Zabbix agent: Version of Zabbix agent running</td>
+	  	<td>Zabbix agent: Version of Zabbix agent running</td>
+	</tr>
+  <tr>	
+	    <td>Zabbix agent: Zabbix agent ping</td>
+		  <td>Zabbix agent: Zabbix agent ping</td>
+	</tr>
+  <tr>	
+	    <td>Zabbix agent: Zabbix agent availability</td>
+	    <td>Zabbix agent: Zabbix agent availability</td>
+	</tr>
+  <tr>
+      <td><i>Network discovery items</i></td>
+      <td><i>Network discovery items</i></td>
+  </tr>
+  <tr>
+      <td><i>Mounted filesystem discovery</i></td>
+      <td><i>Mounted filesystem discovery</i></td>
+  </tr>
+  <tr>
+      <td><i>Block devices discovery</i></td>
+      <td><i>Block devices discovery</i></td>
+  </tr>
+  <tr>
+	    <td>ICMP Ping: ICMP loss</td>
+	</tr>
+  <tr>
+		<td>ICMP Ping: ICMP ping</td>
+	</tr>
+  <tr>
+		<td>ICMP Ping: ICMP response time</td>
+  </tr>
+</table>
 
 
 <BR><strong>GRAPH EXAMPLE</strong>
@@ -113,5 +281,5 @@
 <BR>
 <strong><i>
   This template was tested only with Asus RT-AC86U / RT-AC87U / RT-AX86U router running a Asus Merlin firmware.
-  It should work with other Asus routers as well
+  It should work with other Asus routers as well.
 </i></strong>
