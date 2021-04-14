@@ -69,191 +69,144 @@
 
 <table>
   <tr>
-        <th>Asus Router by Zabbix Agent</th>
-        <th>Asus Router by Zabbix Agent active</th>
+        <th>Asus Router items</th>
   </tr>
   <tr>
 	    <td>Connected clients</td>
-	  	<td>Connected clients</td>
 	</tr>
   <tr>    
 		  <td>DHCP Leases</td>
-	  	<td>DHCP Leases</td>
 	</tr>
   <tr>    
 		  <td>HTTP Performance</td>
-	  	<td>HTTP Performance</td>
 	</tr>
   <tr>    
 	  	<td>HTTP Performance Average</td>
-	    <td>HTTP Performance Average</td>
 	</tr>
   <tr>	
 		  <td>HTTPS Performance</td>
-	  	<td>HTTPS Performance</td>
 	</tr>
   <tr>    
-	  	<td>HTTPS Performance Average</td>
 	  	<td>HTTPS Performance Average</td>
 	</tr>
   <tr>	
 	    <td>NTP Performance</td>
-	  	<td>NTP Performance</td>
 	</tr>
   <tr>	
 	    <td>NTP Performance Average</td>
-	  	<td>NTP Performance Average</td>
 	</tr>
   <tr>	
 	    <td>SSH Service: SSH service is running</td>
-	  	<td>SSH Service: SSH service is running</td>
 	</tr>
   <tr>	
 	    <td>Internet IPv4</td>
-	  	<td>Internet IPv4</td>
 	</tr>
   <tr>	
 	    <td>Internet IPv6</td>
-	  	<td>Internet IPv6</td>
 	</tr>
   <tr>    
-	  	<td>Linux memory by Zabbix agent: Available memory</td>
 	  	<td>Linux memory by Zabbix agent: Available memory</td>
 	</tr>
   <tr>	
 	    <td>Linux memory by Zabbix agent: Available memory in %</td>
-	  	<td>Linux memory by Zabbix agent: Available memory in %</td>
 	</tr>
   <tr>	
 	    <td>Linux memory by Zabbix agent: Available memory in %: Memory utilization</td>
-	  	<td>Linux memory by Zabbix agent: Available memory in %: Memory utilization</td>
 	</tr>
   <tr>	
 	    <td>Linux memory by Zabbix agent: Free swap space</td>
-		  <td>Linux memory by Zabbix agent: Free swap space</td>
 	</tr>
   <tr>    
-	  	<td>Linux memory by Zabbix agent: Free swap space in %</td>
 	  	<td>Linux memory by Zabbix agent: Free swap space in %</td>
 	</tr>
   <tr>	
 	    <td>Linux memory by Zabbix agent: Total memory</td>
-	  	<td>Linux memory by Zabbix agent: Total memory</td>
 	</tr>
   <tr>	
 	    <td>Linux memory by Zabbix agent: Total swap space</td>
-	  	<td>Linux memory by Zabbix agent: Total swap space</td>
 	</tr>
   <tr>	
 	    <td>Memory WebUI Free</td>
-	  	<td>Memory WebUI Free</td>
 	</tr>
   <tr>	
 	    <td>Total memory: Memory WebUI Total</td>
-	  	<td>Total memory: Memory WebUI Total</td>
 	</tr>
   <tr>	
 	    <td>Memory WebUI Used</td>
-	  	<td>Memory WebUI Used</td>
 	</tr>
   <tr>	
 	    <td>CPU idle time</td>
-	  	<td>CPU idle time</td>
 	</tr>
   <tr>	
 	    <td>CPU idle time: CPU utilization</td>
-	  	<td>CPU idle time: CPU utilization</td>
 	</tr>
   <tr>	
 	    <td>Number of CPUs</td>
-	  	<td>Number of CPUs</td>
 	</tr>
   <tr>	
 	    <td>Load average (15m avg)</td>
-	  	<td>Load average (15m avg)</td>
 	</tr>
   <tr>	
 	    <td>Load average (5m avg)</td>
-	  	<td>Load average (5m avg)</td>
 	</tr>
   <tr>	
 	    <td>Load average (1m avg)</td>
-	  	<td>Load average (1m avg)</td>
 	</tr>
   <tr>	
 	    <td>Maximum number of processes</td>
-	  	<td>Maximum number of processes</td>
 	</tr>
   <tr>	
 	    <td>Number of processes</td>
-	  	<td>Number of processes</td>
 	</tr>
   <tr>	
 	    <td>Number of running processes</td>
-	  	<td>Number of running processes</td>
 	</tr>
   <tr>	
 	    <td>Operating system</td>
-	  	<td>Operating system</td>
 	</tr>
   <tr>	
 	    <td>System boot time</td>
-	  	<td>System boot time</td>
 	</tr>
   <tr>	
 	    <td>System description</td>
-	  	<td>System description</td>
 	</tr>
   <tr>	
 	    <td>System local time</td>
-	  	<td>System local time</td>
 	</tr>
   <tr>	
 	    <td>System name</td>
-	  	<td>System name</td>
 	</tr>
   <tr>	
 	    <td>System uptime</td>
-	  	<td>System uptime</td>
 	</tr>
   <tr>	
 	    <td>Temperature CPU</td>
-	  	<td>Temperature CPU</td>
 	</tr>
   <tr>	
 	    <td>Temperature Wireless 2.4GHz</td>
-	  	<td>Temperature Wireless 2.4GHz</td>
 	</tr>
   <tr>	
 	    <td>Temperature Wireless 5.0GHz</td>
-	  	<td>Temperature Wireless 5.0GHz</td>
 	</tr>
   <tr>	
 	    <td>Zabbix agent: Host name of Zabbix agent running</td>
-	  	<td>Zabbix agent: Host name of Zabbix agent running</td>
 	</tr>
   <tr>	
 	    <td>Zabbix agent: Version of Zabbix agent running</td>
-	  	<td>Zabbix agent: Version of Zabbix agent running</td>
 	</tr>
   <tr>	
 	    <td>Zabbix agent: Zabbix agent ping</td>
-		  <td>Zabbix agent: Zabbix agent ping</td>
 	</tr>
   <tr>	
 	    <td>Zabbix agent: Zabbix agent availability</td>
-	    <td>Zabbix agent: Zabbix agent availability</td>
 	</tr>
   <tr>
       <td><i>Network discovery items</i></td>
-      <td><i>Network discovery items</i></td>
   </tr>
   <tr>
       <td><i>Mounted filesystem discovery</i></td>
-      <td><i>Mounted filesystem discovery</i></td>
   </tr>
   <tr>
-      <td><i>Block devices discovery</i></td>
       <td><i>Block devices discovery</i></td>
   </tr>
   <tr>
