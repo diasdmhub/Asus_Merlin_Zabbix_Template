@@ -1,0 +1,1584 @@
+zabbix_export:
+  version: '5.2'
+  date: '2021-04-22T15:20:09Z'
+  groups:
+    -
+      name: Asus
+    -
+      name: Templates
+  templates:
+    -
+      template: 'Asus Router by Zabbix Agent'
+      name: 'Asus Router by Zabbix Agent'
+      description: |
+        Asus WRT router template
+        
+        by diasdm
+        https://github.com/diasdmhub/Zabbix_Template_Asus_Merlin
+      templates:
+        -
+          name: 'ICMP Ping'
+        -
+          name: 'Linux block devices by Zabbix agent'
+        -
+          name: 'Linux filesystems by Zabbix agent'
+        -
+          name: 'Linux memory by Zabbix agent'
+        -
+          name: 'Linux network interfaces by Zabbix agent'
+        -
+          name: 'SSH Service'
+        -
+          name: 'Zabbix agent'
+      groups:
+        -
+          name: Asus
+        -
+          name: Templates
+      applications:
+        -
+          name: CPU
+        -
+          name: Service
+        -
+          name: System
+        -
+          name: Temperature
+      items:
+        -
+          name: 'Maximum number of processes'
+          key: kernel.maxproc
+          delay: 1h
+          history: 7d
+          description: 'It could be increased by using sysctrl utility or modifying file /etc/sysctl.conf.'
+          applications:
+            -
+              name: System
+          preprocessing:
+            -
+              type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1d
+        -
+          name: 'HTTP Performance'
+          type: SIMPLE
+          key: 'net.tcp.service.perf[http,,{$HTTP.STATUS.PORT}]'
+          delay: 5m
+          history: 7d
+          value_type: FLOAT
+          units: s
+          description: 'Web service HTTP performance check.'
+          applications:
+            -
+              name: Service
+          triggers:
+            -
+              expression: '{max(#3)}=0'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '{max(#3)}>0'
+              name: 'HTTP service is down on {HOST.NAME}'
+              opdata: '{ITEM.LASTVALUE1}'
+              url: 'http://{HOST.DNS}:{$HTTP.STATUS.PORT}'
+              priority: HIGH
+              description: 'Check router web page.'
+        -
+          name: 'HTTPS Performance'
+          type: SIMPLE
+          key: 'net.tcp.service.perf[https,,{$HTTPS.STATUS.PORT}]'
+          delay: 5m
+          history: 7d
+          value_type: FLOAT
+          units: s
+          description: 'Web service HTTPS performance check.'
+          applications:
+            -
+              name: Service
+          triggers:
+            -
+              expression: '{max(#3)}=0'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '{max(#3)}>0'
+              name: 'HTTPS service is down on {HOST.NAME}'
+              opdata: '{ITEM.LASTVALUE1}'
+              url: 'https://{HOST.DNS}:{$HTTPS.STATUS.PORT}'
+              priority: HIGH
+              description: 'Check router web page.'
+        -
+          name: 'NTP Performance'
+          type: SIMPLE
+          key: 'net.udp.service.perf[ntp]'
+          delay: 5m
+          history: 1w
+          value_type: FLOAT
+          units: s
+          description: |
+            NTP service performance check.
+            This is an internal check performed by the agent, therefore, the NTP deamon must reply to localhost requests. Remember to check your NTP server configuration to allow for local requests.
+          applications:
+            -
+              name: Service
+          triggers:
+            -
+              expression: '{max(#3)}=0'
+              name: 'NTP service is down on {HOST.NAME}'
+              opdata: '{ITEM.LASTVALUE1}'
+              priority: AVERAGE
+              description: 'Check NTP service'
+        -
+          name: 'Number of processes'
+          key: proc.num
+          history: 7d
+          applications:
+            -
+              name: System
+        -
+          name: 'Number of running processes'
+          key: 'proc.num[,,run]'
+          history: 7d
+          applications:
+            -
+              name: System
+        -
+          name: 'HTTP Performance Average'
+          type: CALCULATED
+          key: service.perf.avg.http
+          delay: 5m
+          history: 2w
+          value_type: FLOAT
+          units: s
+          params: 'avg("net.tcp.service.perf[http,,{$HTTP.STATUS.PORT}]",25m)'
+          description: 'Average of the 5 last values for the graph plotting.'
+          applications:
+            -
+              name: Service
+        -
+          name: 'HTTPS Performance Average'
+          type: CALCULATED
+          key: service.perf.avg.https
+          delay: 5m
+          history: 2w
+          value_type: FLOAT
+          units: s
+          params: 'avg("net.tcp.service.perf[https,,{$HTTPS.STATUS.PORT}]",25m)'
+          description: 'Average of the 5 last values for the graph plotting.'
+          applications:
+            -
+              name: Service
+        -
+          name: 'NTP Performance Average'
+          type: CALCULATED
+          key: service.perf.avg.ntp
+          delay: 5m
+          history: 2w
+          value_type: FLOAT
+          units: s
+          params: 'avg("net.udp.service.perf[ntp]",25m)'
+          description: 'Average of the 5 last values for graph plotting.'
+          applications:
+            -
+              name: Service
+        -
+          name: 'System boot time'
+          key: system.boottime
+          delay: 15m
+          history: 7d
+          units: unixtime
+          applications:
+            -
+              name: System
+          preprocessing:
+            -
+              type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+        -
+          name: 'Load average (1m avg)'
+          key: 'system.cpu.load[all,avg1]'
+          history: 7d
+          value_type: FLOAT
+          applications:
+            -
+              name: CPU
+        -
+          name: 'Load average (5m avg)'
+          key: 'system.cpu.load[all,avg5]'
+          history: 7d
+          value_type: FLOAT
+          applications:
+            -
+              name: CPU
+        -
+          name: 'Load average (15m avg)'
+          key: 'system.cpu.load[all,avg15]'
+          history: 7d
+          value_type: FLOAT
+          applications:
+            -
+              name: CPU
+        -
+          name: 'Number of CPUs'
+          key: system.cpu.num
+          delay: 1h
+          history: 7d
+          applications:
+            -
+              name: CPU
+          preprocessing:
+            -
+              type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1d
+        -
+          name: 'CPU utilization'
+          type: DEPENDENT
+          key: system.cpu.util
+          delay: '0'
+          history: 7d
+          value_type: FLOAT
+          units: '%'
+          description: 'CPU utilization in %'
+          applications:
+            -
+              name: CPU
+          preprocessing:
+            -
+              type: JAVASCRIPT
+              parameters:
+                - |
+                  //Calculate utilization
+                  return (100 - value)
+          master_item:
+            key: 'system.cpu.util[,idle]'
+          triggers:
+            -
+              expression: '{min(5m)}>{$CPU.UTIL.CRIT}'
+              name: 'High CPU utilization (over {$CPU.UTIL.CRIT}% for 5m)'
+              opdata: 'Current utilization: {ITEM.LASTVALUE1}'
+              priority: WARNING
+              description: 'CPU utilization is too high. The system might be slow to respond.'
+              dependencies:
+                -
+                  name: 'Load average is too high (per CPU load over {$LOAD_AVG_PER_CPU.MAX.WARN} for 5m)'
+                  expression: |
+                    {Asus Router by Zabbix Agent:system.cpu.load[all,avg1].min(5m)}/{Asus Router by Zabbix Agent:system.cpu.num.last()}>{$LOAD_AVG_PER_CPU.MAX.WARN}
+                    and {Asus Router by Zabbix Agent:system.cpu.load[all,avg5].last()}>0
+                    and {Asus Router by Zabbix Agent:system.cpu.load[all,avg15].last()}>0
+        -
+          name: 'CPU idle time'
+          key: 'system.cpu.util[,idle]'
+          history: 7d
+          value_type: FLOAT
+          units: '%'
+          description: 'The time the CPU has spent doing nothing.'
+          applications:
+            -
+              name: CPU
+        -
+          name: 'System name'
+          key: system.hostname
+          delay: 1h
+          history: 2w
+          trends: '0'
+          value_type: CHAR
+          description: 'System host name.'
+          inventory_link: NAME
+          applications:
+            -
+              name: System
+          preprocessing:
+            -
+              type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          triggers:
+            -
+              expression: '{diff()}=1 and {strlen()}>0'
+              name: 'System name has changed (new name: {ITEM.VALUE})'
+              priority: INFO
+              description: 'System name has changed. Ack to close.'
+              manual_close: 'YES'
+        -
+          name: 'System local time'
+          key: system.localtime
+          history: 7d
+          units: unixtime
+          description: 'System local time of the host.'
+          applications:
+            -
+              name: System
+          triggers:
+            -
+              expression: '{fuzzytime({$SYSTEM.FUZZYTIME.MAX})}=0'
+              name: 'System time is out of sync (diff with Zabbix server > {$SYSTEM.FUZZYTIME.MAX}s)'
+              priority: WARNING
+              description: 'The host system time is different from the Zabbix server time.'
+              manual_close: 'YES'
+        -
+          name: 'Connected clients'
+          key: 'system.run[arp -a | awk ''$4!="<incomplete>"'' | wc -l]'
+          delay: 5m
+          history: 1w
+          description: 'Connected clients according to ARP table.'
+          applications:
+            -
+              name: Service
+        -
+          name: 'DHCP Leases'
+          key: 'system.run[cat /var/lib/misc/dnsmasq.leases | wc -l]'
+          delay: 5m
+          history: 1w
+          description: 'DHCP Leases'
+          applications:
+            -
+              name: Service
+        -
+          name: 'Internet IPv6'
+          key: 'system.run[ip addr show {$IF.INTERNET} | grep -m 1 inet6 | awk ''{print $2}'']'
+          delay: 10m
+          history: 7d
+          trends: '0'
+          value_type: CHAR
+          description: |
+            Internet IPv6 address retrieved from {$IF.INTERNET} interface.
+            If your router uses other Internet interface, try changing your interface name at host macro settings.
+          applications:
+            -
+              name: Status
+        -
+          name: 'Internet IPv4'
+          key: 'system.run[ip addr show {$IF.INTERNET} | grep -m 1 inet | awk ''{print $2}'']'
+          delay: 10m
+          history: 7d
+          trends: '0'
+          value_type: CHAR
+          description: |
+            Internet IPv4 address retrieved from {$IF.INTERNET} interface.
+            If your router uses other internet interface, try changing your interface name at host macro settings.
+          applications:
+            -
+              name: Status
+        -
+          name: 'Temperature Wireless 2.4GHz'
+          key: 'system.run[wl -i {$IF.WLTEMP2} phy_tempsense | awk ''{print $1/2+20}'']'
+          history: 7d
+          value_type: FLOAT
+          units: °C
+          description: 'Wireless 2.4GHz Temperature'
+          applications:
+            -
+              name: Temperature
+          triggers:
+            -
+              expression: '{last(#1)}>=65 and {last(#2)}>=59'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '{last(#1)}<65 and {last(#2)}<59'
+              name: 'Wireless 2.4GHz high temperature'
+              opdata: '{ITEM.LASTVALUE1}'
+              priority: AVERAGE
+              description: 'Wireless 2.4GHz high temperature'
+        -
+          name: 'Temperature Wireless 5.0GHz'
+          key: 'system.run[wl -i {$IF.WLTEMP5} phy_tempsense | awk ''{print $1/2+20}'']'
+          history: 7d
+          value_type: FLOAT
+          units: °C
+          description: 'Wireless 5.0GHz Temperature'
+          applications:
+            -
+              name: Temperature
+          triggers:
+            -
+              expression: '{last(#1)}>=65 and {last(#2)}>=59'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '{last(#1)}<65 and {last(#2)}<59'
+              name: 'Wireless 5.0Hz high temperature'
+              opdata: '{ITEM.LASTVALUE1}'
+              priority: AVERAGE
+              description: 'Wireless 5.0Hz high temperature'
+        -
+          name: 'Operating system'
+          key: system.sw.os
+          delay: 1h
+          history: 2w
+          trends: '0'
+          value_type: CHAR
+          inventory_link: OS
+          applications:
+            -
+              name: System
+          preprocessing:
+            -
+              type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1d
+          triggers:
+            -
+              expression: '{diff()}=1 and {strlen()}>0'
+              recovery_mode: NONE
+              name: 'Operating system description has changed'
+              priority: INFO
+              description: 'Operating system description has changed. Possible reasons that system has been updated or replaced. Ack to close.'
+              manual_close: 'YES'
+              dependencies:
+                -
+                  name: 'System name has changed (new name: {ITEM.VALUE})'
+                  expression: '{Asus Router by Zabbix Agent:system.hostname.diff()}=1 and {Asus Router by Zabbix Agent:system.hostname.strlen()}>0'
+        -
+          name: 'System description'
+          key: system.uname
+          delay: 1h
+          history: 2w
+          trends: '0'
+          value_type: CHAR
+          description: 'The information as normally returned by ''uname -a''.'
+          applications:
+            -
+              name: System
+        -
+          name: 'System uptime'
+          key: system.uptime
+          delay: '5m;5m/1-7,00:00-03:59;5m/1-7,04:05-24:00'
+          history: 1w
+          units: s
+          description: 'System uptime'
+          applications:
+            -
+              name: Status
+          triggers:
+            -
+              expression: '{last()}<10m'
+              name: '{HOST.NAME} has been restarted (uptime < 10m)'
+              priority: WARNING
+              description: 'The host uptime is less than 10 minutes'
+              manual_close: 'YES'
+        -
+          name: 'Temperature CPU'
+          key: 'vfs.file.contents[/sys/devices/virtual/thermal/thermal_zone0/temp]'
+          history: 7d
+          value_type: FLOAT
+          units: °C
+          description: 'CPU Temperature'
+          applications:
+            -
+              name: Temperature
+          preprocessing:
+            -
+              type: MULTIPLIER
+              parameters:
+                - '0.001'
+          triggers:
+            -
+              expression: '{last(#1)}>={$CPU.TOP.TEMP}'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '{last(#1)}<{$CPU.TOP.TEMP}-1'
+              name: 'ALERT CPU High temperature'
+              opdata: '{ITEM.LASTVALUE1}'
+              priority: HIGH
+              description: 'High CPU temperature'
+            -
+              expression: '{last(#1)}>={$CPU.HIGH.TEMP}'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '{last(#1)}<{$CPU.HIGH.TEMP}-1'
+              name: 'CPU High temperature'
+              opdata: '{ITEM.LASTVALUE1}'
+              priority: AVERAGE
+              description: 'High CPU temperature'
+        -
+          name: 'Memory WebUI Free'
+          key: 'vm.memory.size[free]'
+          history: 7d
+          units: B
+          description: |
+            Free memory in Bytes.
+            Zabbix agent collects RAM information from "/proc/meminfo".
+          applications:
+            -
+              name: Memory
+        -
+          name: 'Memory WebUI Used'
+          type: CALCULATED
+          key: 'vm.memory.size[webui,used]'
+          history: 7d
+          units: B
+          params: |
+            last("vm.memory.size[webui,total]")-
+            last("vm.memory.size[free]")
+          description: |
+            Used memory in Bytes.
+            Webui used = Webui total - Webui free
+          applications:
+            -
+              name: Memory
+      httptests:
+        -
+          name: 'HTTPS WEB UI Reply'
+          application:
+            name: Service
+          delay: 5m
+          agent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36'
+          steps:
+            -
+              name: 'HTTPS WEB UI'
+              url: 'https://{HOST.CONN}:{$HTTPS.STATUS.PORT}/'
+              retrieve_mode: BOTH
+              timeout: 5s
+        -
+          name: 'HTTP WEB UI Reply'
+          application:
+            name: Service
+          delay: 5m
+          agent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36'
+          status: DISABLED
+          steps:
+            -
+              name: 'HTTP WEB UI'
+              url: 'http://{HOST.CONN}:{$HTTP.STATUS.PORT}/'
+              retrieve_mode: BOTH
+              timeout: 5s
+      macros:
+        -
+          macro: '{$CPU.HIGH.TEMP}'
+          value: '79'
+          description: 'High temperature threashold'
+        -
+          macro: '{$CPU.TOP.TEMP}'
+          value: '82'
+          description: 'Higher temperature threashold'
+        -
+          macro: '{$CPU.UTIL.CRIT}'
+          value: '90'
+        -
+          macro: '{$DNSNAME}'
+          value: ntp.org
+          description: 'Desired domain name to query with "net.dns" key'
+        -
+          macro: '{$DNSSERVER}'
+          value: 127.0.0.1
+          description: 'Desired name server to respond to a query from "net.dns" key'
+        -
+          macro: '{$HTTP.STATUS.PORT}'
+          value: '80'
+          description: 'Define here your host HTTP port'
+        -
+          macro: '{$HTTPS.STATUS.PORT}'
+          value: '443'
+          description: 'Define here your host HTTPS port'
+        -
+          macro: '{$IF.ERRORS.WARN}'
+          value: '2'
+        -
+          macro: '{$IF.INTERNET}'
+          value: ppp0
+          description: 'Internet connected interface. Change at host level if it is different for your device.'
+        -
+          macro: '{$IF.WLTEMP2}'
+          value: eth5
+          description: '2.4GHz wireless interface for temperature sensor. Check your router''s interface.'
+        -
+          macro: '{$IF.WLTEMP5}'
+          value: eth6
+          description: '5GHz wireless interface for temperature sensor. Check your router''s interface.'
+        -
+          macro: '{$IFCONTROL}'
+          value: '1'
+        -
+          macro: '{$KERNEL.MAXPROC.MIN}'
+          value: '1024'
+        -
+          macro: '{$LOAD_AVG_PER_CPU.MAX.WARN}'
+          value: '1.5'
+          description: 'Load per CPU considered sustainable. Tune if needed.'
+        -
+          macro: '{$MEMORY.AVAILABLE.MIN}'
+          value: 20M
+          description: 'This macro is used as a threshold in memory available trigger.'
+        -
+          macro: '{$MEMORY.UTIL.MAX}'
+          value: '90'
+          description: 'This macro is used as a threshold in memory utilization trigger.'
+        -
+          macro: '{$NET.IF.IFNAME.MATCHES}'
+          value: '^.*$'
+        -
+          macro: '{$NET.IF.IFNAME.NOT_MATCHES}'
+          value: '(^Software Loopback Interface|^NULL[0-9.]*$|^[Ll]o[0-9.]*$|^[Ss]ystem$|^Nu[0-9.]*$|^veth[0-9a-z]+$|docker[0-9]+|br-[a-z0-9]{12}|dpsta|spu_[du]s_dummy|sit0|ifb[0-9]|imq[0-9]|ip6(gre|tnl)0)'
+          description: 'Filter out loopbacks, nulls, docker veth links and docker0 bridge by default'
+        -
+          macro: '{$SYSTEM.FUZZYTIME.MAX}'
+          value: '60'
+        -
+          macro: '{$VFS.DEV.DEVNAME.NOT_MATCHES}'
+          value: '^(mtdblock[0-9]*|loop[0-9]*|sd[a-z][0-9]+|nbd[0-9]+|sr[0-9]+|fd[0-9]+|dm-[0-9]+|ram[0-9]+|ploop[a-z0-9]+|md[0-9]*|hcp[0-9]*|zram[0-9]*)'
+          description: 'This macro is used in block devices discovery. Can be overridden on the host or linked template level'
+    -
+      template: 'Asus Router by Zabbix Agent active'
+      name: 'Asus Router by Zabbix Agent active'
+      description: |
+        Asus WRT router template with Zabbix Agent active
+        
+        by diasdm
+        https://github.com/diasdmhub/Zabbix_Template_Asus_Merlin
+      templates:
+        -
+          name: 'Linux block devices by Zabbix agent active'
+        -
+          name: 'Linux filesystems by Zabbix agent active'
+        -
+          name: 'Linux memory by Zabbix agent active'
+        -
+          name: 'Linux network interfaces by Zabbix agent active'
+        -
+          name: 'Zabbix agent active'
+      groups:
+        -
+          name: Asus
+        -
+          name: Templates
+      applications:
+        -
+          name: CPU
+        -
+          name: Service
+        -
+          name: System
+        -
+          name: Temperature
+      items:
+        -
+          name: 'Maximum number of processes'
+          type: ZABBIX_ACTIVE
+          key: kernel.maxproc
+          delay: 1h
+          history: 7d
+          description: 'It could be increased by using sysctrl utility or modifying file /etc/sysctl.conf.'
+          applications:
+            -
+              name: System
+          preprocessing:
+            -
+              type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1d
+        -
+          name: 'HTTP Performance'
+          type: ZABBIX_ACTIVE
+          key: 'net.tcp.service.perf[http,,{$HTTP.STATUS.PORT}]'
+          delay: 5m
+          history: 7d
+          value_type: FLOAT
+          units: s
+          description: |
+            Web service HTTP performance check.
+            Internal agent check.
+          applications:
+            -
+              name: Service
+          triggers:
+            -
+              expression: '{max(#3)}=0'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '{max(#3)}>0'
+              name: 'HTTP service is down on {HOST.NAME}'
+              opdata: '{ITEM.LASTVALUE1}'
+              url: 'http://{HOST.DNS}:{$HTTP.STATUS.PORT}'
+              priority: HIGH
+              description: 'Check router web page.'
+        -
+          name: 'HTTPS Performance'
+          type: SIMPLE
+          key: 'net.tcp.service.perf[https,,{$HTTPS.STATUS.PORT}]'
+          delay: 5m
+          history: 7d
+          value_type: FLOAT
+          units: s
+          description: 'Web service HTTPS performance check.'
+          applications:
+            -
+              name: Service
+          triggers:
+            -
+              expression: '{max(#3)}=0'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '{max(#3)}>0'
+              name: 'HTTPS service is down on {HOST.NAME}'
+              opdata: '{ITEM.LASTVALUE1}'
+              url: 'https://{HOST.DNS}:{$HTTPS.STATUS.PORT}'
+              priority: HIGH
+              description: 'Check router web page.'
+        -
+          name: 'SSH service is running'
+          type: ZABBIX_ACTIVE
+          key: 'net.tcp.service[ssh,{HOST.CONN}]'
+          history: 7d
+          description: 'Internal SSH check from host''s agent to host.'
+          applications:
+            -
+              name: Service
+          valuemap:
+            name: 'Service state'
+          triggers:
+            -
+              expression: '{max(#3)}=0'
+              name: 'SSH service is down on {HOST.NAME}'
+              opdata: 'Status: {ITEM.LASTVALUE1}'
+              priority: AVERAGE
+        -
+          name: 'NTP Performance'
+          type: ZABBIX_ACTIVE
+          key: 'net.udp.service.perf[ntp]'
+          delay: 5m
+          history: 1w
+          value_type: FLOAT
+          units: s
+          description: |
+            NTP service performance check.
+            This is an internal check performed by the agent, therefore, the NTP deamon must reply to localhost requests. Remember to check your NTP server configuration to allow for local requests.
+          applications:
+            -
+              name: Service
+          triggers:
+            -
+              expression: '{max(#3)}=0'
+              name: 'NTP service is down on {HOST.NAME}'
+              opdata: '{ITEM.LASTVALUE1}'
+              priority: AVERAGE
+              description: 'Check NTP service'
+        -
+          name: 'Number of processes'
+          type: ZABBIX_ACTIVE
+          key: proc.num
+          history: 7d
+          applications:
+            -
+              name: System
+        -
+          name: 'Number of running processes'
+          type: ZABBIX_ACTIVE
+          key: 'proc.num[,,run]'
+          history: 7d
+          applications:
+            -
+              name: System
+        -
+          name: 'HTTP Performance Average'
+          type: CALCULATED
+          key: service.perf.avg.http
+          delay: 5m
+          history: 2w
+          value_type: FLOAT
+          units: s
+          params: 'avg("net.tcp.service.perf[http,,{$HTTP.STATUS.PORT}]",25m)'
+          description: 'Average of the 5 last values for the graph plotting.'
+          applications:
+            -
+              name: Service
+        -
+          name: 'HTTPS Performance Average'
+          type: CALCULATED
+          key: service.perf.avg.https
+          delay: 5m
+          history: 2w
+          value_type: FLOAT
+          units: s
+          params: 'avg("net.tcp.service.perf[https,,{$HTTPS.STATUS.PORT}]",25m)'
+          description: 'Average of the 5 last values for the graph plotting.'
+          applications:
+            -
+              name: Service
+        -
+          name: 'NTP Performance Average'
+          type: CALCULATED
+          key: service.perf.avg.ntp
+          delay: 5m
+          history: 2w
+          value_type: FLOAT
+          units: s
+          params: 'avg("net.udp.service.perf[ntp]",25m)'
+          description: 'Average of the 5 last values for graph plotting.'
+          applications:
+            -
+              name: Service
+        -
+          name: 'System boot time'
+          type: ZABBIX_ACTIVE
+          key: system.boottime
+          delay: 15m
+          history: 7d
+          units: unixtime
+          applications:
+            -
+              name: System
+          preprocessing:
+            -
+              type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+        -
+          name: 'Load average (1m avg)'
+          type: ZABBIX_ACTIVE
+          key: 'system.cpu.load[all,avg1]'
+          history: 7d
+          value_type: FLOAT
+          applications:
+            -
+              name: CPU
+        -
+          name: 'Load average (5m avg)'
+          type: ZABBIX_ACTIVE
+          key: 'system.cpu.load[all,avg5]'
+          history: 7d
+          value_type: FLOAT
+          applications:
+            -
+              name: CPU
+        -
+          name: 'Load average (15m avg)'
+          type: ZABBIX_ACTIVE
+          key: 'system.cpu.load[all,avg15]'
+          history: 7d
+          value_type: FLOAT
+          applications:
+            -
+              name: CPU
+        -
+          name: 'Number of CPUs'
+          type: ZABBIX_ACTIVE
+          key: system.cpu.num
+          delay: 1h
+          history: 7d
+          applications:
+            -
+              name: System
+          preprocessing:
+            -
+              type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1d
+        -
+          name: 'CPU utilization'
+          type: DEPENDENT
+          key: system.cpu.util
+          delay: '0'
+          history: 7d
+          value_type: FLOAT
+          units: '%'
+          description: 'CPU utilization in %'
+          applications:
+            -
+              name: CPU
+          preprocessing:
+            -
+              type: JAVASCRIPT
+              parameters:
+                - |
+                  //Calculate utilization
+                  return (100 - value)
+          master_item:
+            key: 'system.cpu.util[,idle]'
+          triggers:
+            -
+              expression: '{min(5m)}>{$CPU.UTIL.CRIT}'
+              name: 'High CPU utilization (over {$CPU.UTIL.CRIT}% for 5m)'
+              opdata: 'Current utilization: {ITEM.LASTVALUE1}'
+              priority: WARNING
+              description: 'CPU utilization is too high. The system might be slow to respond.'
+              dependencies:
+                -
+                  name: 'Load average is too high (per CPU load over {$LOAD_AVG_PER_CPU.MAX.WARN} for 5m)'
+                  expression: |
+                    {Asus Router by Zabbix Agent active:system.cpu.load[all,avg1].min(5m)}/{Asus Router by Zabbix Agent active:system.cpu.num.last()}>{$LOAD_AVG_PER_CPU.MAX.WARN}
+                    and {Asus Router by Zabbix Agent active:system.cpu.load[all,avg5].last()}>0
+                    and {Asus Router by Zabbix Agent active:system.cpu.load[all,avg15].last()}>0
+        -
+          name: 'CPU idle time'
+          type: ZABBIX_ACTIVE
+          key: 'system.cpu.util[,idle]'
+          history: 7d
+          value_type: FLOAT
+          units: '%'
+          description: 'The time the CPU has spent doing nothing.'
+          applications:
+            -
+              name: CPU
+        -
+          name: 'System name'
+          type: ZABBIX_ACTIVE
+          key: system.hostname
+          delay: 1h
+          history: 2w
+          trends: '0'
+          value_type: CHAR
+          description: 'System host name.'
+          inventory_link: NAME
+          applications:
+            -
+              name: System
+          preprocessing:
+            -
+              type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          triggers:
+            -
+              expression: '{diff()}=1 and {strlen()}>0'
+              name: 'System name has changed (new name: {ITEM.VALUE})'
+              priority: INFO
+              description: 'System name has changed. Ack to close.'
+              manual_close: 'YES'
+        -
+          name: 'System local time'
+          type: ZABBIX_ACTIVE
+          key: system.localtime
+          history: 7d
+          units: unixtime
+          description: 'System local time of the host.'
+          applications:
+            -
+              name: System
+          triggers:
+            -
+              expression: '{fuzzytime({$SYSTEM.FUZZYTIME.MAX})}=0'
+              name: 'System time is out of sync (diff with Zabbix server > {$SYSTEM.FUZZYTIME.MAX}s)'
+              priority: WARNING
+              description: 'The host system time is different from the Zabbix server time.'
+              manual_close: 'YES'
+        -
+          name: 'Connected clients'
+          type: ZABBIX_ACTIVE
+          key: 'system.run[arp -a | awk ''$4!="<incomplete>"'' | wc -l]'
+          delay: 5m
+          history: 1w
+          description: 'Connected clients according to ARP table.'
+          applications:
+            -
+              name: Service
+        -
+          name: 'DHCP Leases'
+          type: ZABBIX_ACTIVE
+          key: 'system.run[cat /var/lib/misc/dnsmasq.leases | wc -l]'
+          delay: 5m
+          history: 1w
+          description: 'DHCP Leases'
+          applications:
+            -
+              name: Service
+        -
+          name: 'Internet IPv6'
+          type: ZABBIX_ACTIVE
+          key: 'system.run[ip addr show {$IF.INTERNET} | grep -m 1 inet6 | awk ''{print $2}'']'
+          delay: 10m
+          history: 7d
+          trends: '0'
+          value_type: CHAR
+          description: |
+            Internet IPv6 address retrieved from {$IF.INTERNET} interface.
+            If your router uses other Internet interface, try changing your interface name at host macro settings.
+          applications:
+            -
+              name: Status
+        -
+          name: 'Internet IPv4'
+          type: ZABBIX_ACTIVE
+          key: 'system.run[ip addr show {$IF.INTERNET} | grep -m 1 inet | awk ''{print $2}'']'
+          delay: 10m
+          history: 7d
+          trends: '0'
+          value_type: CHAR
+          description: |
+            Internet IPv4 address retrieved from {$IF.INTERNET} interface.
+            If your router uses other internet interface, try changing your interface name at host macro settings.
+          applications:
+            -
+              name: Status
+        -
+          name: 'Temperature Wireless 2.4GHz'
+          type: ZABBIX_ACTIVE
+          key: 'system.run[wl -i {$IF.WLTEMP2} phy_tempsense | awk ''{print $1/2+20}'']'
+          history: 7d
+          value_type: FLOAT
+          units: °C
+          description: 'Wireless 2.4GHz Temperature'
+          applications:
+            -
+              name: Temperature
+          triggers:
+            -
+              expression: '{last(#1)}>=65 and {last(#2)}>=59'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '{last(#1)}<65 and {last(#2)}<59'
+              name: 'Wireless 2.4GHz high temperature'
+              opdata: '{ITEM.LASTVALUE1}'
+              priority: AVERAGE
+              description: 'Wireless 2.4GHz high temperature'
+        -
+          name: 'Temperature Wireless 5.0GHz'
+          type: ZABBIX_ACTIVE
+          key: 'system.run[wl -i {$IF.WLTEMP5} phy_tempsense | awk ''{print $1/2+20}'']'
+          history: 7d
+          value_type: FLOAT
+          units: °C
+          description: 'Wireless 5.0GHz Temperature'
+          applications:
+            -
+              name: Temperature
+          triggers:
+            -
+              expression: '{last(#1)}>=65 and {last(#2)}>=59'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '{last(#1)}<65 and {last(#2)}<59'
+              name: 'Wireless 5.0Hz high temperature'
+              opdata: '{ITEM.LASTVALUE1}'
+              priority: AVERAGE
+              description: 'Wireless 5.0Hz high temperature'
+        -
+          name: 'Operating system'
+          type: ZABBIX_ACTIVE
+          key: system.sw.os
+          delay: 1h
+          history: 2w
+          trends: '0'
+          value_type: CHAR
+          inventory_link: OS
+          applications:
+            -
+              name: System
+          preprocessing:
+            -
+              type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1d
+          triggers:
+            -
+              expression: '{diff()}=1 and {strlen()}>0'
+              recovery_mode: NONE
+              name: 'Operating system description has changed'
+              priority: INFO
+              description: 'Operating system description has changed. Possible reasons that system has been updated or replaced. Ack to close.'
+              manual_close: 'YES'
+              dependencies:
+                -
+                  name: 'System name has changed (new name: {ITEM.VALUE})'
+                  expression: '{Asus Router by Zabbix Agent active:system.hostname.diff()}=1 and {Asus Router by Zabbix Agent active:system.hostname.strlen()}>0'
+        -
+          name: 'System description'
+          type: ZABBIX_ACTIVE
+          key: system.uname
+          delay: 1h
+          history: 2w
+          trends: '0'
+          value_type: CHAR
+          description: 'The information as normally returned by ''uname -a''.'
+          applications:
+            -
+              name: System
+        -
+          name: 'System uptime'
+          type: ZABBIX_ACTIVE
+          key: system.uptime
+          delay: '5m;5m/1-7,00:00-03:59;5m/1-7,04:05-24:00'
+          history: 1w
+          units: s
+          description: 'System uptime'
+          applications:
+            -
+              name: Status
+          triggers:
+            -
+              expression: '{last()}<10m'
+              name: '{HOST.NAME} has been restarted (uptime < 10m)'
+              priority: WARNING
+              description: 'The host uptime is less than 10 minutes'
+              manual_close: 'YES'
+        -
+          name: 'Temperature CPU'
+          type: ZABBIX_ACTIVE
+          key: 'vfs.file.contents[/sys/devices/virtual/thermal/thermal_zone0/temp]'
+          history: 7d
+          value_type: FLOAT
+          units: °C
+          description: 'CPU Temperature'
+          applications:
+            -
+              name: Temperature
+          preprocessing:
+            -
+              type: MULTIPLIER
+              parameters:
+                - '0.001'
+          triggers:
+            -
+              expression: '{last(#1)}>={$CPU.TOP.TEMP}'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '{last(#1)}<{$CPU.TOP.TEMP}-1'
+              name: 'ALERT CPU High temperature'
+              opdata: '{ITEM.LASTVALUE1}'
+              priority: HIGH
+              description: 'High CPU temperature'
+            -
+              expression: '{last(#1)}>={$CPU.HIGH.TEMP}'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '{last(#1)}<{$CPU.HIGH.TEMP}-1'
+              name: 'CPU High temperature'
+              opdata: '{ITEM.LASTVALUE1}'
+              priority: AVERAGE
+              description: 'High CPU temperature'
+        -
+          name: 'Memory WebUI Free'
+          type: ZABBIX_ACTIVE
+          key: 'vm.memory.size[free]'
+          history: 7d
+          units: B
+          description: |
+            Free memory in Bytes.
+            Zabbix agent collects RAM information from "/proc/meminfo".
+          applications:
+            -
+              name: Memory
+        -
+          name: 'Memory WebUI Used'
+          type: CALCULATED
+          key: 'vm.memory.size[webui,used]'
+          history: 7d
+          units: B
+          params: |
+            last("vm.memory.size[webui,total]")-
+            last("vm.memory.size[free]")
+          description: |
+            Used memory in Bytes.
+            Webui used = Webui total - Webui free
+          applications:
+            -
+              name: Memory
+      httptests:
+        -
+          name: 'HTTPS WEB UI Reply'
+          application:
+            name: Service
+          delay: 5m
+          agent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36'
+          steps:
+            -
+              name: 'WEB UI HTTPS'
+              url: 'https://{HOST.CONN}:{$HTTPS.STATUS.PORT}/'
+              retrieve_mode: BOTH
+              timeout: 5s
+        -
+          name: 'HTTP WEB UI Reply'
+          application:
+            name: Service
+          delay: 5m
+          agent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36'
+          status: DISABLED
+          steps:
+            -
+              name: 'HTTP WEB UI'
+              url: 'https://{HOST.CONN}:{$HTTP.STATUS.PORT}/'
+              retrieve_mode: BOTH
+              timeout: 5s
+      macros:
+        -
+          macro: '{$CPU.HIGH.TEMP}'
+          value: '79'
+          description: 'High temperature threashold'
+        -
+          macro: '{$CPU.TOP.TEMP}'
+          value: '82'
+          description: 'Higher temperature threashold'
+        -
+          macro: '{$CPU.UTIL.CRIT}'
+          value: '90'
+        -
+          macro: '{$DNSNAME}'
+          value: ntp.org
+          description: 'Desired domain name to query with "net.dns" key'
+        -
+          macro: '{$DNSSERVER}'
+          value: 127.0.0.1
+          description: 'Desired name server to respond to a query from "net.dns" key'
+        -
+          macro: '{$HTTP.STATUS.PORT}'
+          value: '80'
+          description: 'Define here your host HTTP port'
+        -
+          macro: '{$HTTPS.STATUS.PORT}'
+          value: '443'
+          description: 'Define here your host HTTPS port'
+        -
+          macro: '{$IF.ERRORS.WARN}'
+          value: '2'
+        -
+          macro: '{$IF.INTERNET}'
+          value: ppp0
+          description: 'Internet connected interface. Change at host level if it is different for your device.'
+        -
+          macro: '{$IF.WLTEMP2}'
+          value: eth5
+          description: '2.4GHz wireless interface for temperature sensor. Check your router''s interface.'
+        -
+          macro: '{$IF.WLTEMP5}'
+          value: eth6
+          description: '5GHz wireless interface for temperature sensor. Check your router''s interface.'
+        -
+          macro: '{$IFCONTROL}'
+          value: '1'
+        -
+          macro: '{$KERNEL.MAXPROC.MIN}'
+          value: '1024'
+        -
+          macro: '{$LOAD_AVG_PER_CPU.MAX.WARN}'
+          value: '1.5'
+          description: 'Load per CPU considered sustainable. Tune if needed.'
+        -
+          macro: '{$MEMORY.AVAILABLE.MIN}'
+          value: 20M
+          description: 'This macro is used as a threshold in memory available trigger.'
+        -
+          macro: '{$MEMORY.UTIL.MAX}'
+          value: '90'
+          description: 'This macro is used as a threshold in memory utilization trigger.'
+        -
+          macro: '{$NET.IF.IFNAME.MATCHES}'
+          value: '^.*$'
+        -
+          macro: '{$NET.IF.IFNAME.NOT_MATCHES}'
+          value: '(^Software Loopback Interface|^NULL[0-9.]*$|^[Ll]o[0-9.]*$|^[Ss]ystem$|^Nu[0-9.]*$|^veth[0-9a-z]+$|docker[0-9]+|br-[a-z0-9]{12}|dpsta|spu_[du]s_dummy|sit0|ifb[0-9]|imq[0-9]|ip6(gre|tnl)0)'
+          description: 'Filter out loopbacks, nulls, docker veth links and docker0 bridge by default'
+        -
+          macro: '{$SYSTEM.FUZZYTIME.MAX}'
+          value: '60'
+        -
+          macro: '{$VFS.DEV.DEVNAME.NOT_MATCHES}'
+          value: '^(mtdblock[0-9]*|loop[0-9]*|sd[a-z][0-9]+|nbd[0-9]+|sr[0-9]+|fd[0-9]+|dm-[0-9]+|ram[0-9]+|ploop[a-z0-9]+|md[0-9]*|hcp[0-9]*|zram[0-9]*)'
+          description: 'This macro is used in block devices discovery. Can be overridden on the host or linked template level'
+  triggers:
+    -
+      expression: '{Asus Router by Zabbix Agent:proc.num.last()}/{Asus Router by Zabbix Agent:kernel.maxproc.last()}*100>80'
+      name: 'Getting closer to process limit (over 80% used)'
+      opdata: '{ITEM.LASTVALUE1} active, {ITEM.LASTVALUE2} limit.'
+      priority: WARNING
+    -
+      expression: '{Asus Router by Zabbix Agent active:proc.num.last()}/{Asus Router by Zabbix Agent active:kernel.maxproc.last()}*100>80'
+      name: 'Getting closer to process limit (over 80% used)'
+      opdata: '{ITEM.LASTVALUE1} active, {ITEM.LASTVALUE2} limit.'
+      priority: WARNING
+    -
+      expression: |
+        {Asus Router by Zabbix Agent:system.cpu.load[all,avg1].min(5m)}/{Asus Router by Zabbix Agent:system.cpu.num.last()}>{$LOAD_AVG_PER_CPU.MAX.WARN}
+        and {Asus Router by Zabbix Agent:system.cpu.load[all,avg5].last()}>0
+        and {Asus Router by Zabbix Agent:system.cpu.load[all,avg15].last()}>0
+      name: 'Load average is too high (per CPU load over {$LOAD_AVG_PER_CPU.MAX.WARN} for 5m)'
+      opdata: 'Load averages(1m 5m 15m): ({ITEM.LASTVALUE1} {ITEM.LASTVALUE3} {ITEM.LASTVALUE4}), # of CPUs: {ITEM.LASTVALUE2}'
+      priority: AVERAGE
+      description: 'Per CPU load average is too high. Your system may be slow to respond.'
+    -
+      expression: |
+        {Asus Router by Zabbix Agent active:system.cpu.load[all,avg1].min(5m)}/{Asus Router by Zabbix Agent active:system.cpu.num.last()}>{$LOAD_AVG_PER_CPU.MAX.WARN}
+        and {Asus Router by Zabbix Agent active:system.cpu.load[all,avg5].last()}>0
+        and {Asus Router by Zabbix Agent active:system.cpu.load[all,avg15].last()}>0
+      name: 'Load average is too high (per CPU load over {$LOAD_AVG_PER_CPU.MAX.WARN} for 5m)'
+      opdata: 'Load averages(1m 5m 15m): ({ITEM.LASTVALUE1} {ITEM.LASTVALUE3} {ITEM.LASTVALUE4}), # of CPUs: {ITEM.LASTVALUE2}'
+      priority: AVERAGE
+      description: 'Per CPU load average is too high. Your system may be slow to respond.'
+  graphs:
+    -
+      name: 'CPU utilization'
+      ymin_type_1: FIXED
+      ymax_type_1: FIXED
+      graph_items:
+        -
+          drawtype: GRADIENT_LINE
+          color: 1A7C11
+          item:
+            host: 'Asus Router by Zabbix Agent active'
+            key: system.cpu.util
+    -
+      name: 'CPU utilization'
+      ymin_type_1: FIXED
+      ymax_type_1: FIXED
+      graph_items:
+        -
+          drawtype: GRADIENT_LINE
+          color: 1A7C11
+          item:
+            host: 'Asus Router by Zabbix Agent'
+            key: system.cpu.util
+    -
+      name: 'DHCP x Connected'
+      ymin_type_1: FIXED
+      graph_items:
+        -
+          sortorder: '1'
+          drawtype: BOLD_LINE
+          color: 199C0D
+          calc_fnc: ALL
+          item:
+            host: 'Asus Router by Zabbix Agent'
+            key: 'system.run[cat /var/lib/misc/dnsmasq.leases | wc -l]'
+        -
+          sortorder: '2'
+          drawtype: GRADIENT_LINE
+          color: F63100
+          calc_fnc: ALL
+          item:
+            host: 'Asus Router by Zabbix Agent'
+            key: 'system.run[arp -a | awk ''$4!="<incomplete>"'' | wc -l]'
+    -
+      name: 'DHCP x Connected'
+      ymin_type_1: FIXED
+      graph_items:
+        -
+          sortorder: '1'
+          drawtype: BOLD_LINE
+          color: 199C0D
+          calc_fnc: ALL
+          item:
+            host: 'Asus Router by Zabbix Agent active'
+            key: 'system.run[cat /var/lib/misc/dnsmasq.leases | wc -l]'
+        -
+          sortorder: '2'
+          drawtype: GRADIENT_LINE
+          color: F63100
+          calc_fnc: ALL
+          item:
+            host: 'Asus Router by Zabbix Agent active'
+            key: 'system.run[arp -a | awk ''$4!="<incomplete>"'' | wc -l]'
+    -
+      name: 'Memory WEBUI'
+      ymin_type_1: FIXED
+      ymax_type_1: ITEM
+      ymax_item_1:
+        host: 'Asus Router by Zabbix Agent'
+        key: 'vm.memory.size[webui,total]'
+      graph_items:
+        -
+          sortorder: '1'
+          drawtype: GRADIENT_LINE
+          color: FB8C00
+          item:
+            host: 'Asus Router by Zabbix Agent'
+            key: 'vm.memory.size[webui,used]'
+        -
+          sortorder: '2'
+          drawtype: BOLD_LINE
+          color: 2774A4
+          item:
+            host: 'Asus Router by Zabbix Agent'
+            key: 'vm.memory.size[free]'
+        -
+          sortorder: '3'
+          color: FF0000
+          item:
+            host: 'Asus Router by Zabbix Agent'
+            key: 'vm.memory.size[webui,total]'
+    -
+      name: 'Memory WEBUI'
+      ymin_type_1: FIXED
+      ymax_type_1: ITEM
+      ymax_item_1:
+        host: 'Asus Router by Zabbix Agent active'
+        key: 'vm.memory.size[webui,total]'
+      graph_items:
+        -
+          sortorder: '1'
+          drawtype: GRADIENT_LINE
+          color: FB8C00
+          item:
+            host: 'Asus Router by Zabbix Agent active'
+            key: 'vm.memory.size[webui,used]'
+        -
+          sortorder: '2'
+          drawtype: BOLD_LINE
+          color: 2774A4
+          item:
+            host: 'Asus Router by Zabbix Agent active'
+            key: 'vm.memory.size[free]'
+        -
+          sortorder: '3'
+          color: FF0000
+          item:
+            host: 'Asus Router by Zabbix Agent active'
+            key: 'vm.memory.size[webui,total]'
+    -
+      name: Processes
+      graph_items:
+        -
+          sortorder: '1'
+          drawtype: GRADIENT_LINE
+          color: 1A7C11
+          item:
+            host: 'Asus Router by Zabbix Agent'
+            key: proc.num
+        -
+          sortorder: '2'
+          drawtype: GRADIENT_LINE
+          color: 2774A4
+          item:
+            host: 'Asus Router by Zabbix Agent'
+            key: 'proc.num[,,run]'
+    -
+      name: Processes
+      graph_items:
+        -
+          sortorder: '1'
+          drawtype: GRADIENT_LINE
+          color: 1A7C11
+          item:
+            host: 'Asus Router by Zabbix Agent active'
+            key: proc.num
+        -
+          sortorder: '2'
+          drawtype: GRADIENT_LINE
+          color: 2774A4
+          item:
+            host: 'Asus Router by Zabbix Agent active'
+            key: 'proc.num[,,run]'
+    -
+      name: 'System load'
+      ymin_type_1: FIXED
+      graph_items:
+        -
+          sortorder: '1'
+          drawtype: BOLD_LINE
+          color: 1A7C11
+          item:
+            host: 'Asus Router by Zabbix Agent'
+            key: 'system.cpu.load[all,avg1]'
+        -
+          sortorder: '2'
+          drawtype: BOLD_LINE
+          color: 2774A4
+          item:
+            host: 'Asus Router by Zabbix Agent'
+            key: 'system.cpu.load[all,avg5]'
+        -
+          sortorder: '3'
+          drawtype: BOLD_LINE
+          color: F63100
+          item:
+            host: 'Asus Router by Zabbix Agent'
+            key: 'system.cpu.load[all,avg15]'
+    -
+      name: 'System load'
+      ymin_type_1: FIXED
+      graph_items:
+        -
+          sortorder: '1'
+          drawtype: BOLD_LINE
+          color: 1A7C11
+          item:
+            host: 'Asus Router by Zabbix Agent active'
+            key: 'system.cpu.load[all,avg1]'
+        -
+          sortorder: '2'
+          drawtype: BOLD_LINE
+          color: 2774A4
+          item:
+            host: 'Asus Router by Zabbix Agent active'
+            key: 'system.cpu.load[all,avg5]'
+        -
+          sortorder: '3'
+          drawtype: BOLD_LINE
+          color: F63100
+          item:
+            host: 'Asus Router by Zabbix Agent active'
+            key: 'system.cpu.load[all,avg15]'
+    -
+      name: Temperature
+      ymin_type_1: FIXED
+      graph_items:
+        -
+          sortorder: '1'
+          drawtype: BOLD_LINE
+          color: B71C1C
+          item:
+            host: 'Asus Router by Zabbix Agent'
+            key: 'vfs.file.contents[/sys/devices/virtual/thermal/thermal_zone0/temp]'
+        -
+          sortorder: '2'
+          drawtype: BOLD_LINE
+          color: A1887F
+          item:
+            host: 'Asus Router by Zabbix Agent'
+            key: 'system.run[wl -i {$IF.WLTEMP2} phy_tempsense | awk ''{print $1/2+20}'']'
+        -
+          sortorder: '3'
+          drawtype: BOLD_LINE
+          color: 2774A4
+          item:
+            host: 'Asus Router by Zabbix Agent'
+            key: 'system.run[wl -i {$IF.WLTEMP5} phy_tempsense | awk ''{print $1/2+20}'']'
+    -
+      name: Temperature
+      ymin_type_1: FIXED
+      graph_items:
+        -
+          sortorder: '1'
+          drawtype: BOLD_LINE
+          color: B71C1C
+          item:
+            host: 'Asus Router by Zabbix Agent active'
+            key: 'vfs.file.contents[/sys/devices/virtual/thermal/thermal_zone0/temp]'
+        -
+          sortorder: '2'
+          drawtype: BOLD_LINE
+          color: A1887F
+          item:
+            host: 'Asus Router by Zabbix Agent active'
+            key: 'system.run[wl -i {$IF.WLTEMP2} phy_tempsense | awk ''{print $1/2+20}'']'
+        -
+          sortorder: '3'
+          drawtype: BOLD_LINE
+          color: 2774A4
+          item:
+            host: 'Asus Router by Zabbix Agent active'
+            key: 'system.run[wl -i {$IF.WLTEMP5} phy_tempsense | awk ''{print $1/2+20}'']'
+    -
+      name: 'WEB x NTP Perfomance'
+      show_work_period: 'NO'
+      show_triggers: 'NO'
+      ymin_type_1: FIXED
+      graph_items:
+        -
+          sortorder: '1'
+          drawtype: GRADIENT_LINE
+          color: 0080FF
+          item:
+            host: 'Asus Router by Zabbix Agent'
+            key: 'net.tcp.service.perf[https,,{$HTTPS.STATUS.PORT}]'
+        -
+          sortorder: '2'
+          drawtype: BOLD_LINE
+          color: '3E2723'
+          item:
+            host: 'Asus Router by Zabbix Agent'
+            key: 'net.udp.service.perf[ntp]'
+    -
+      name: 'WEB x NTP Perfomance'
+      show_work_period: 'NO'
+      show_triggers: 'NO'
+      ymin_type_1: FIXED
+      graph_items:
+        -
+          sortorder: '1'
+          drawtype: GRADIENT_LINE
+          color: 0080FF
+          item:
+            host: 'Asus Router by Zabbix Agent active'
+            key: 'net.tcp.service.perf[https,,{$HTTPS.STATUS.PORT}]'
+        -
+          sortorder: '2'
+          drawtype: BOLD_LINE
+          color: '3E2723'
+          item:
+            host: 'Asus Router by Zabbix Agent active'
+            key: 'net.udp.service.perf[ntp]'
+  value_maps:
+    -
+      name: 'Service state'
+      mappings:
+        -
+          value: '0'
+          newvalue: Down
+        -
+          value: '1'
+          newvalue: Up
