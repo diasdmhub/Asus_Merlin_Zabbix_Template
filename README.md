@@ -3,7 +3,9 @@
 <strong>
   If you want to monitor your Asus SOHO router using a Zabbix agent, this template offers some useful monitoring items.
 </strong>
-<BR><BR>
+<BR>
+<div align="right">If you copy, please mention your source.</div>
+<BR>
 
 
 ### REQUIREMENTS
