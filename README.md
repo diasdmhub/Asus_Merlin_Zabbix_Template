@@ -165,7 +165,7 @@
 	<td>Memory WebUI Free</td>
   </tr>
   <tr>	
-	<td>Total memory: Memory WebUI Total</td>
+	<td>Memory WebUI Total</td>
   </tr>
   <tr>	
 	<td>Memory WebUI Used</td>
