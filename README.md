@@ -407,7 +407,7 @@
 
 <BR><strong>TESTED AS IS</strong>
 <strong><i>
-  <BR>This template was tested only with Asus RT-AC86U / RT-AC87U / RT-AX86U router running a Asus Merlin firmware.
+  <BR>This template was tested only with Asus RT-AC86U / RT-AC87U / RT-AX86U router running an Asus Merlin firmware.
   <BR>It should work with other Asus routers as well.
   <BR>Feedbacks are welcome.
 </i></strong>
