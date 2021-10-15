@@ -360,6 +360,9 @@
 	<td>Memory WEBUI</td>
   </tr>
   <tr>
+	<td>NTPMerlin</td>
+  </tr>
+  <tr>
 	<td>Processes</td>
   </tr>
   <tr>
