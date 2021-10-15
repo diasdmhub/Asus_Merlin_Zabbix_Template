@@ -171,6 +171,15 @@
 	<td>Memory WebUI Used</td>
   </tr>
   <tr>	
+	<td>NTPMerlin CSV</td>
+  </tr>
+  <tr>	
+	<td>NTPMerlin CSV: NTPMerlin Drift</td>
+  </tr>
+  <tr>	
+	<td>NTPMerlin CSV: NTPMerlin Offset</td>
+  </tr>
+  <tr>	
 	<td>CPU idle time</td>
   </tr>
   <tr>	
