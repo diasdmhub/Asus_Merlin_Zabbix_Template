@@ -1,6 +1,6 @@
 zabbix_export:
   version: '5.4'
-  date: '2021-10-15T01:57:30Z'
+  date: '2021-10-16T19:27:37Z'
   groups:
     -
       uuid: 36bff6c29af64692839d077febfc7079
@@ -2056,18 +2056,18 @@ zabbix_export:
         -
           sortorder: '1'
           drawtype: GRADIENT_LINE
-          color: BF360C
-          item:
-            host: 'Asus Router by Zabbix Agent'
-            key: ntpmerlin.offset
-        -
-          sortorder: '2'
-          drawtype: BOLD_LINE
           color: 0D47A1
           yaxisside: RIGHT
           item:
             host: 'Asus Router by Zabbix Agent'
             key: ntpmerlin.drift
+        -
+          sortorder: '2'
+          drawtype: BOLD_LINE
+          color: BF360C
+          item:
+            host: 'Asus Router by Zabbix Agent'
+            key: ntpmerlin.offset
     -
       uuid: 14d8eb0be110412ebf2712cb69606fac
       name: NTPMerlin
@@ -2076,18 +2076,18 @@ zabbix_export:
         -
           sortorder: '1'
           drawtype: GRADIENT_LINE
-          color: BF360C
-          item:
-            host: 'Asus Router by Zabbix Agent active'
-            key: ntpmerlin.offset
-        -
-          sortorder: '2'
-          drawtype: BOLD_LINE
           color: 0D47A1
           yaxisside: RIGHT
           item:
             host: 'Asus Router by Zabbix Agent active'
             key: ntpmerlin.drift
+        -
+          sortorder: '2'
+          drawtype: BOLD_LINE
+          color: BF360C
+          item:
+            host: 'Asus Router by Zabbix Agent active'
+            key: ntpmerlin.offset
     -
       uuid: 889fa431535b4191bb5ad49d966edb7b
       name: Processes
