@@ -409,7 +409,7 @@
 	
 	
 ### GRAPH EXAMPLE
-<img src="zabbix_graph_example.png" alt="Graph examples">
+<img src="images/graph_example.png" alt="Graph examples">
 
 <BR>
 <UL>
