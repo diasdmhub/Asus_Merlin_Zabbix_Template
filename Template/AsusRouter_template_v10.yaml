@@ -1,6 +1,6 @@
 zabbix_export:
   version: '5.4'
-  date: '2021-10-16T19:27:37Z'
+  date: '2021-10-19T19:07:18Z'
   groups:
     -
       uuid: 36bff6c29af64692839d077febfc7079
@@ -1884,10 +1884,10 @@ zabbix_export:
         -
           sortorder: '2'
           drawtype: BOLD_LINE
-          color: 1976D2
+          color: F7941D
           item:
             host: 'Asus Router by Zabbix Agent'
-            key: ntpmerlin.offset
+            key: conmon.jitter
         -
           sortorder: '3'
           drawtype: BOLD_LINE
@@ -1912,7 +1912,7 @@ zabbix_export:
         -
           sortorder: '2'
           drawtype: BOLD_LINE
-          color: 1976D2
+          color: F7941D
           item:
             host: 'Asus Router by Zabbix Agent active'
             key: conmon.jitter
