@@ -171,6 +171,15 @@
 	<td>Memory WebUI Used</td>
   </tr>
   <tr>	
+	<td>NTPMerlin CSV</td>
+  </tr>
+  <tr>	
+	<td>NTPMerlin CSV: NTPMerlin Drift</td>
+  </tr>
+  <tr>	
+	<td>NTPMerlin CSV: NTPMerlin Offset</td>
+  </tr>
+  <tr>	
 	<td>CPU idle time</td>
   </tr>
   <tr>	
@@ -351,6 +360,9 @@
 	<td>Memory WEBUI</td>
   </tr>
   <tr>
+	<td>NTPMerlin</td>
+  </tr>
+  <tr>
 	<td>Processes</td>
   </tr>
   <tr>
@@ -397,7 +409,7 @@
 	
 	
 ### GRAPH EXAMPLE
-<img src="zabbix_graph_example.png" alt="Graph examples">
+<img src="images/graph_example.png" alt="Graph examples">
 
 <BR>
 <UL>
