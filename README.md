@@ -97,6 +97,9 @@
 
 <table>
   <tr>
+	<td>AdGuard Home Status</td>
+  </tr>
+  <tr>
 	<td>Conmon CSV</td>
   </tr>
   <tr>
@@ -107,12 +110,6 @@
   </tr>
   <tr>
 	<td>Conmon CSV: Conmon Ping</td>
-  <tr>
-	<td>Connected clients</td>
-  </tr>
-  <tr>    
-	<td>DHCP Leases</td>
-  </tr>
   <tr>    
 	<td>HTTP Performance</td>
   </tr>
@@ -346,9 +343,6 @@
 <table>
   <tr>
 	<td>CPU utilization</td>
-  </tr>
-  <tr>
-	<td>DHCP x Connected</td>
   </tr>
   <tr>
 	<td>Linux memory by Zabbix agent: Memory usage</td>
