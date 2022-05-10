@@ -1,7 +1,7 @@
 # Zabbix Template for Asus WRT Merlin Routers
 
 <strong>
-  If you want to monitor your Asus SOHO router using a Zabbix agent, this template offers some useful monitoring items.
+  If you want to monitor your Asus SOHO router using a Zabbix agent, this template offers some useful monitoring items, triggers, graphs and more.
 </strong>
 <BR>
 <div align="right">If you copy, please mention your source.</div>
