@@ -267,6 +267,9 @@
 ### TRIGGERS
 <table>
   <tr>
+	<td>AdGuardHome Status Down</td>
+  </tr>
+  <tr>
 	<td>ALERT CPU High temperature</td>
   </tr>
   <tr>
