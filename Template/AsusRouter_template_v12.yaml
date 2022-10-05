@@ -1,6 +1,6 @@
 zabbix_export:
   version: '6.2'
-  date: '2022-10-05T01:29:21Z'
+  date: '2022-10-05T02:00:18Z'
   template_groups:
     -
       uuid: 36bff6c29af64692839d077febfc7079
@@ -845,14 +845,6 @@ zabbix_export:
           macro: '{$CPU.UTIL.CRIT}'
           value: '90'
         -
-          macro: '{$DNSNAME}'
-          value: ntp.org
-          description: 'Desired domain name to query with "net.dns" key'
-        -
-          macro: '{$DNSSERVER}'
-          value: 127.0.0.1
-          description: 'Desired name server to respond to a query from "net.dns" key'
-        -
           macro: '{$HTTP.STATUS.PORT}'
           value: '80'
           description: 'Define here your host HTTP port'
@@ -860,9 +852,6 @@ zabbix_export:
           macro: '{$HTTPS.STATUS.PORT}'
           value: '443'
           description: 'Define here your host HTTPS port'
-        -
-          macro: '{$IF.ERRORS.WARN}'
-          value: '2'
         -
           macro: '{$IF.INTERNET}'
           value: ppp0
@@ -876,12 +865,6 @@ zabbix_export:
           value: eth6
           description: '5GHz wireless interface for temperature sensor. Check your router''s interface.'
         -
-          macro: '{$IFCONTROL}'
-          value: '1'
-        -
-          macro: '{$KERNEL.MAXPROC.MIN}'
-          value: '1024'
-        -
           macro: '{$LOAD_AVG_PER_CPU.MAX.WARN}'
           value: '1.5'
           description: 'Load per CPU considered sustainable. Tune if needed.'
@@ -893,9 +876,6 @@ zabbix_export:
           macro: '{$MEMORY.UTIL.MAX}'
           value: '90'
           description: 'This macro is used as a threshold in memory utilization trigger.'
-        -
-          macro: '{$NET.IF.IFNAME.MATCHES}'
-          value: '^.*$'
         -
           macro: '{$NET.IF.IFNAME.NOT_MATCHES}'
           value: '(^Software Loopback Interface|^NULL[0-9.]*$|^[Ll]o[0-9.]*$|^[Ss]ystem$|^Nu[0-9.]*$|^veth[0-9a-z]+$|docker[0-9]+|br-[a-z0-9]{12}|dpsta|spu_[du]s_dummy|sit0|ifb[0-9]|imq[0-9]|ip6(gre|tnl)0)'
@@ -1799,14 +1779,6 @@ zabbix_export:
           macro: '{$CPU.UTIL.CRIT}'
           value: '90'
         -
-          macro: '{$DNSNAME}'
-          value: ntp.org
-          description: 'Desired domain name to query with "net.dns" key'
-        -
-          macro: '{$DNSSERVER}'
-          value: 127.0.0.1
-          description: 'Desired name server to respond to a query from "net.dns" key'
-        -
           macro: '{$HTTP.STATUS.PORT}'
           value: '80'
           description: 'Define here your host HTTP port'
@@ -1814,9 +1786,6 @@ zabbix_export:
           macro: '{$HTTPS.STATUS.PORT}'
           value: '443'
           description: 'Define here your host HTTPS port'
-        -
-          macro: '{$IF.ERRORS.WARN}'
-          value: '2'
         -
           macro: '{$IF.INTERNET}'
           value: ppp0
@@ -1830,12 +1799,6 @@ zabbix_export:
           value: eth6
           description: '5GHz wireless interface for temperature sensor. Check your router''s interface.'
         -
-          macro: '{$IFCONTROL}'
-          value: '1'
-        -
-          macro: '{$KERNEL.MAXPROC.MIN}'
-          value: '1024'
-        -
           macro: '{$LOAD_AVG_PER_CPU.MAX.WARN}'
           value: '1.5'
           description: 'Load per CPU considered sustainable. Tune if needed.'
@@ -1847,9 +1810,6 @@ zabbix_export:
           macro: '{$MEMORY.UTIL.MAX}'
           value: '90'
           description: 'This macro is used as a threshold in memory utilization trigger.'
-        -
-          macro: '{$NET.IF.IFNAME.MATCHES}'
-          value: '^.*$'
         -
           macro: '{$NET.IF.IFNAME.NOT_MATCHES}'
           value: '(^Software Loopback Interface|^NULL[0-9.]*$|^[Ll]o[0-9.]*$|^[Ss]ystem$|^Nu[0-9.]*$|^veth[0-9a-z]+$|docker[0-9]+|br-[a-z0-9]{12}|dpsta|spu_[du]s_dummy|sit0|ifb[0-9]|imq[0-9]|ip6(gre|tnl)0)'
