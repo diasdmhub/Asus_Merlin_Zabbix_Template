@@ -7,7 +7,9 @@
 <div align="right">
 <a href="./LICENSE">
 	<img src="https://img.shields.io/badge/License-GPL3-blue?logo=opensourceinitiative&logoColor=fff" alt="License GPL3">
-	<img src="https://img.shields.io/badge/Version-v11-blue?logo=azurepipelines&amp;color=0aa8d2" alt="Current Version">
+</a>
+<a href="https://github.com/diasdmhub/Asus_Merlin_Zabbix_Template/releases/tag/latest">
+	<img src="https://img.shields.io/badge/Version-v12-blue?logo=azurepipelines&amp;color=0aa8d2" alt="Current Version">
 </a>
 </div>
 <BR>
