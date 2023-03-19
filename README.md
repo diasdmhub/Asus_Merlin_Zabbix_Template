@@ -17,13 +17,13 @@
 
 ### REQUIREMENTS
 <UL>
-  <LI>Asus WRT Router with Merlin firmware</LI>
+  <LI>Asus WRT Router with <a href=https://www.asuswrt-merlin.net/>Merlin firmware</a></LI>
   <LI>Entware installed</LI>
   <LI>Zabbix agent installed</LI>
     <UL>
       <LI>You can try my <a href=https://github.com/diasdmhub/Zabbix_agent_Asus_Merlin>Zabbix Agent installation script</a></LI>
     </UL>
-  <LI>Zabbix agent configuration file</LI>
+  <LI>Configure Zabbix Agent file:</LI>
     <UL>
       <LI>Use <code>Server=</code> parameter with your Zabbix Server IP/Hostname</LI>
       <LI>Add <code>AllowKey=system.run[*]</code> parameter<i> (necessary for custom checks)</i></LI>
