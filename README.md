@@ -39,7 +39,13 @@ For generic Linux items, it is recommended to link your host to the OOTB Linux t
   - Add `AllowRoot=1` parameter *(necessary since no Zabbix user is created)* \
   [*Zabbix forum discussion*](https://www.zabbix.com/forum/zabbix-troubleshooting-and-problems/402023-zabbix-agent-system-run)
 
-- [**Download the latest release**](https://github.com/diasdmhub/Asus_Merlin_Zabbix_Template/releases)
+<BR>
+
+---
+### ➡️ [Download (latest)](https://github.com/diasdmhub/Asus_Merlin_Zabbix_Template/releases)
+---
+#### ➡️ [*How to import templates*](https://www.zabbix.com/documentation/current/en/manual/xml_export_import/templates#importing)
+---
 
 <BR>
 
