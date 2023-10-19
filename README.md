@@ -1,427 +1,123 @@
 # Zabbix Template for Asus WRT Merlin Routers
 
-<strong>
-  If you want to monitor your Asus SOHO router using a Zabbix agent, this template offers some useful monitoring items, triggers, graphs and more.
-</strong>
-<BR>
 <div align="right">
 <a href="./LICENSE">
 	<img src="https://img.shields.io/badge/License-GPL3-blue?logo=opensourceinitiative&logoColor=fff" alt="License GPL3">
 </a>
 <a href="https://github.com/diasdmhub/Asus_Merlin_Zabbix_Template/releases/tag/latest">
-	<img src="https://img.shields.io/badge/Version-62-blue?logo=azurepipelines&amp;color=0aa8d2" alt="Current Version">
+	<img src="https://img.shields.io/badge/Version-647-blue?logo=azurepipelines&amp;color=0aa8d2" alt="Latest Version">
 </a>
 </div>
 <BR>
 
 
+### OVERVIEW
+If you want to monitor your Asus SOHO router using a Zabbix agent, this template offers some useful monitoring items, triggers, graphs and more.
+It targets Asus WRT routers with the Merlin firmware installed.
+
+The main focus is to monitor specific Asus Merlin Router items. \
+For generic Linux items, it is recommended to link your host to the OOTB Linux template which offers multiple items for monitoring, including CPU, memory, disk and bandwidth information.
+
+<BR>
+
+
 ### REQUIREMENTS
-<UL>
-  <LI>Asus WRT Router with <a href=https://www.asuswrt-merlin.net/>Merlin firmware</a></LI>
-  <LI>Entware installed</LI>
-  <LI>Zabbix agent installed</LI>
-    <UL>
-      <LI>You can try my <a href=https://github.com/diasdmhub/Zabbix_agent_Asus_Merlin>Zabbix Agent installation script</a></LI>
-    </UL>
-  <LI>Configure Zabbix Agent file:</LI>
-    <UL>
-      <LI>Use <code>Server=</code> parameter with your Zabbix Server IP/Hostname</LI>
-      <LI>Add <code>AllowKey=system.run[*]</code> parameter<i> (necessary for custom checks)</i></LI>
-      <LI>Add <code>AllowRoot=1</code> parameter<i> (necessary since no Zabbix user is created)</i></LI>
-      <small><i><a href=https://www.zabbix.com/forum/zabbix-troubleshooting-and-problems/402023-zabbix-agent-system-run>Zabbix forum discussion</a></i></small>
-    </UL>
-</UL>
+
+- Asus WRT Router with [Merlin firmware](https://www.asuswrt-merlin.net)
+- Entware installed
+- Zabbix agent installed
+  - You can try my [Zabbix Agent installation script](https://github.com/diasdmhub/Zabbix_agent_Asus_Merlin)
+
+
+### SETUP
+
+- Configure the Zabbix Agent configuration file:
+  - Use `Server=` parameter with your Zabbix Server IP/Hostname
+  - Add `AllowKey=system.run[*]` parameter *(necessary for custom checks)*
+  - Add `AllowRoot=1` parameter *(necessary since no Zabbix user is created)* \
+  [*Zabbix forum discussion*](https://www.zabbix.com/forum/zabbix-troubleshooting-and-problems/402023-zabbix-agent-system-run)
+
 <BR>
 
 
-### ENABLED
-<table>
-  <tr>
-	<td>Items</td>
-  </tr>
-  <tr>
-	<td>Triggers</td>
-  </tr>
-  <tr>
-	<td>Graphs</td>
-  </tr>
-  <tr>
-	<td>Discovery rules</td>
-  </tr>
-  <tr>
-	<td>WEB scenarios</td>
-  </tr>
-</table>
+### TESTED VERSION
+- This template was tested only with Asus RT-AC86U / RT-AC87U / RT-AX86U router running an Asus Merlin firmware.
+- It should work with other Asus routers as well.
+- [*SNBForums original post*](https://www.snbforums.com/threads/asus-merlin-router-with-zabbix-agent.64343)
+- [*WEB UI Memory discussion*](https://www.snbforums.com/threads/gui-memory-x-meminfo.68683/#post-645321)
+
 <BR>
 
 
-### LINKED TEMPLATES
-<table>
-  <tr>
-	<td>SSH Service (<i>passive agent only</i>)</td>
-  </tr>
-  <tr>
-	<td>ICMP Ping (<i>passive agent only</i>)</td>
-  </tr>
-  <tr>
-	<td>Linux block devices by Zabbix agent</td>
-  </tr>
-  <tr>
-	<td>Linux filesystems by Zabbix agent</td>
-  </tr>
-  <tr>
-	<td>Linux network interfaces by Zabbix agent</td>
-  </tr>
-  <tr>
-	<td>Linux memory by Zabbix agent</td>
-  </tr>
-  <tr>
-	<td>Zabbix agent</td>
-  </tr>
-</table>
-<BR>
-
-	
 ### ITEMS
 
-<!--
-<style>
-  table {
-        font-family: inherit;
-        border-collapse: collapse;
-        width: 100%;
-  }
-  td, th {
-	    border: 1px solid #dddddd;
-	    text-align: left;
-	    padding: 8px;
-  }
-  tr:nth-child(even) {
-        background-color: #dddddd;
-  }
-</style>
--->
+| Name                            |
+| ------------------------------- |
+| AdGuard Home Status             |
+| Conmon CSV                      |
+| Conmon CSV: Conmon Jitter       |
+| Conmon CSV: Conmon Line Quality |
+| Conmon CSV: Conmon Ping         |
+| DNS Service IPv4                |
+| DNS Service IPv6                |
+| Device Model                    |
+| Internet IPv4                   |
+| Internet IPv6                   |
+| Memory WebUI Free               |
+| Memory WebUI Total              |
+| Memory WebUI Used               |
+| NTP Performance                 |
+| NTPMerlin CSV                   |
+| NTPMerlin CSV: NTPMerlin Drift  |
+| NTPMerlin CSV: NTPMerlin Offset |
+| Temperature CPU                 |
+| Temperature Wireless 2.4GHz     |
+| Temperature Wireless 5.0GHz     |
+| Web Performance                 |
 
-<table>
-  <tr>
-	<td>AdGuard Home Status</td>
-  </tr>
-  <tr>
-	<td>Conmon CSV</td>
-  </tr>
-  <tr>
-	<td>Conmon CSV: Conmon Jitter</td>
-  </tr>
-  <tr>
-	<td>Conmon CSV: Conmon Line Quality</td>
-  </tr>
-  <tr>
-	<td>Conmon CSV: Conmon Ping</td>
-  <tr>    
-	<td>HTTP Performance</td>
-  </tr>
-  <tr>    
-	<td>HTTP Performance Average</td>
-  </tr>
-  <tr>	
-	<td>HTTPS Performance</td>
-  </tr>
-  <tr>    
-	<td>HTTPS Performance Average</td>
-  </tr>
-  <tr>	
-	<td>NTP Performance</td>
-  </tr>
-  <tr>	
-	<td>SSH Service: SSH service is running</td>
-  </tr>
-  <tr>	
-	<td>Internet IPv4</td>
-  </tr>
-  <tr>	
-	<td>Internet IPv6</td>
-  </tr>
-  <tr>    
-	<td>Linux memory by Zabbix agent: Available memory</td>
-  </tr>
-  <tr>	
-	<td>Linux memory by Zabbix agent: Available memory in %</td>
-  </tr>
-  <tr>	
-	<td>Linux memory by Zabbix agent: Memory utilization</td>
-  </tr>
-  <tr>	
-	<td>Linux memory by Zabbix agent: Free swap space</td>
-  </tr>
-  <tr>    
-	<td>Linux memory by Zabbix agent: Free swap space in %</td>
-  </tr>
-  <tr>	
-	<td>Linux memory by Zabbix agent: Total memory</td>
-  </tr>
-  <tr>	
-	<td>Linux memory by Zabbix agent: Total swap space</td>
-  </tr>
-  <tr>	
-	<td>Memory WebUI Free</td>
-  </tr>
-  <tr>	
-	<td>Memory WebUI Total</td>
-  </tr>
-  <tr>	
-	<td>Memory WebUI Used</td>
-  </tr>
-  <tr>	
-	<td>NTPMerlin CSV</td>
-  </tr>
-  <tr>	
-	<td>NTPMerlin CSV: NTPMerlin Drift</td>
-  </tr>
-  <tr>	
-	<td>NTPMerlin CSV: NTPMerlin Offset</td>
-  </tr>
-  <tr>	
-	<td>CPU idle time</td>
-  </tr>
-  <tr>	
-	<td>CPU idle time: CPU utilization</td>
-  </tr>
-  <tr>	
-	<td>Number of CPUs</td>
-  </tr>
-  <tr>	
-	<td>Load average (15m avg)</td>
-  </tr>
-  <tr>	
-	<td>Load average (5m avg)</td>
-  </tr>
-  <tr>	
-	<td>Load average (1m avg)</td>
-  </tr>
-  <tr>	
-	<td>Maximum number of processes</td>
-  </tr>
-  <tr>	
-	<td>Number of processes</td>
-  </tr>
-  <tr>	
-	<td>Number of running processes</td>
-  </tr>
-  <tr>	
-	<td>Operating system</td>
-  </tr>
-  <tr>	
-	<td>System boot time</td>
-  </tr>
-  <tr>	
-	<td>System description</td>
-  </tr>
-  <tr>	
-	<td>System local time</td>
-  </tr>
-  <tr>	
-	<td>System name</td>
-  </tr>
-  <tr>	
-	<td>System uptime</td>
-  </tr>
-  <tr>	
-	<td>Temperature CPU</td>
-  </tr>
-  <tr>	
-	<td>Temperature Wireless 2.4GHz</td>
-  </tr>
-  <tr>	
-	<td>Temperature Wireless 5.0GHz</td>
-  </tr>
-  <tr>	
-	<td>Zabbix agent: Host name of Zabbix agent running</td>
-  </tr>
-  <tr>	
-	<td>Zabbix agent: Version of Zabbix agent running</td>
-  </tr>
-  <tr>	
-	<td>Zabbix agent: Zabbix agent ping</td>
-  </tr>
-  <tr>	
-	<td>Zabbix agent: Zabbix agent availability</td>
-  </tr>
-  <tr>
-	<td><i>Network discovery items</i></td>
-  </tr>
-  <tr>
-	<td><i>Mounted filesystem discovery</i></td>
-  </tr>
-  <tr>
-	<td><i>Block devices discovery</i></td>
-  </tr>
-  <tr>
-	<td>ICMP Ping: ICMP loss</td>
-  </tr>
-  <tr>
-	<td>ICMP Ping: ICMP ping</td>
-  </tr>
-  <tr>
-	<td>ICMP Ping: ICMP response time</td>
-  </tr>
-</table>
 <BR>
 
 
 ### TRIGGERS
-<table>
-  <tr>
-	<td>AdGuardHome Status Down</td>
-  </tr>
-  <tr>
-	<td>ALERT CPU High temperature</td>
-  </tr>
-  <tr>
-	<td>Conmon reports low line quality</td>
-  </tr>
-  <tr>
-	<td>CPU High temperature</td>
-  </tr>
-  <tr>
-	<td>Getting closer to process limit (over 80% used)</td>
-  </tr>
-  <tr>
-	<td>High CPU utilization (over % for 5m)</td>
-  </tr>
-  <tr>
-	<td>ICMP Ping: High ICMP ping loss</td>
-  </tr>
-  <tr>
-	<td>ICMP Ping: High ICMP ping response time</td>
-  </tr>
-  <tr>
-	<td>Linux memory by Zabbix agent: High memory utilization (> % for 5m)</td>
-  </tr>
-  <tr>
-	<td>Linux memory by Zabbix agent: High swap space usage (less than % free)</td>
-  </tr>
-  <tr>
-	<td>HTTP service is down</td>
-  </tr>
-  <tr>
-	<td>HTTPS service is down</td>
-  </tr>
-  <tr>
-	<td>Linux memory by Zabbix agent: Lack of available memory</td>
-  </tr>
-  <tr>
-	<td>Load average is too high (per CPU load for 5m)</td>
-  </tr>
-  <tr>
-	<td>NTP service is down</td>
-  </tr>
-  <tr>
-	<td>Operating system description has changed</td>
-  </tr>
-  <tr>
-	<td>SSH Service: SSH service is down</td>
-  </tr>
-  <tr>
-	<td>System name has changed</td>
-  </tr>
-  <tr>
-	<td>System time is out of sync (diff with Zabbix server > s)</td>
-  </tr>
-  <tr>
-	<td>ICMP Ping: Unavailable by ICMP ping</td>
-  </tr>
-  <tr>
-	<td>Wireless 2.4GHz high temperature</td>
-  </tr>
-  <tr>
-	<td>Wireless 5.0Hz high temperature</td>
-  </tr>
-  <tr>
-	<td>Zabbix agent: Zabbix agent is not available (for m)</td>
-  </tr>
-  <tr>
-	<td>HOST has been restarted (uptime < 10m)</td>
-  </tr>
-</table>
+
+| Name                             |
+| -------------------------------- |
+| AdGuardHome Status Down          |
+| CPU High temperature             |
+| CPU High temperature ALERT       |
+| Conmon abnormal Ping rise        |
+| Conmon reports low line quality  |
+| DNS Service IPv4 down            |
+| DNS Service IPv6 down            |
+| NTP service is down              |
+| Web service is down              |
+| Wireless 2.4GHz high temperature |
+| Wireless 5.0Hz high temperature  |
+
 <BR>
 
 
 ### GRAPHS
-<table>
-  <tr>
-	<td>CPU utilization</td>
-  </tr>
-  <tr>
-	<td>Linux memory by Zabbix agent: Memory usage</td>
-  </tr>
-  <tr>
-	<td>Linux memory by Zabbix agent: Memory utilization</td>
-  </tr>
-  <tr>
-	<td>Memory WEBUI</td>
-  </tr>
-  <tr>
-	<td>NTPMerlin</td>
-  </tr>
-  <tr>
-	<td>Processes</td>
-  </tr>
-  <tr>
-	<td>Linux memory by Zabbix agent: Swap usage</td>
-  </tr>
-  <tr>
-	<td>System load</td>
-  </tr>
-  <tr>
-	<td>Temperature</td>
-  </tr>
-  <tr>
-	<td>WEB x NTP Perfomance</td>
-  </tr>	
-</table>
-<BR>
 
+| Name                 |
+| -------------------- |
+| Conmon Response Time |
+| Memory WEBUI         |
+| NTPMerlin            |
+| Temperature          |
+| WEB x NTP Perfomance |
 
-### DISCOVERY RULES
-<table>
-  <tr>
-	<td>Linux network interfaces by Zabbix agent: Network interface discovery</td>
-  </tr>
-  <tr>
-	<td>Linux filesystems by Zabbix agent: Mounted filesystem discovery</td>
-  </tr>
-  <tr>
-	<td>	Linux block devices by Zabbix agent: Block devices discovery</td>
-  </tr>
-</table>
 <BR>
 
 	
 ### WEB MONITORING
-<table>
-  <tr>
-	<td>HTTPS WEB UI Reply</td>
-  </tr>
-  <tr>
-	<td>HTTP WEB UI Reply</td>
-  </tr>
-</table>
+
+| Name            |
+| --------------- |
+| WEB UI Scenario |
+
 <BR>
 	
 	
 ### GRAPH EXAMPLE
-<img src="images/graph_example.png" alt="Graph examples">
-
-<BR>
-<UL>
-  <LI><a href=https://www.snbforums.com/threads/asus-merlin-router-with-zabbix-agent.64343>SNBForums original post</a></LI>
-  <LI><a href=https://www.snbforums.com/threads/gui-memory-x-meminfo.68683/#post-645321>WEB UI Memory discussion</a></LI>
-</UL>
-
-
-<BR><strong>TESTED AS IS</strong>
-<strong><i>
-  <BR>This template was tested only with Asus RT-AC86U / RT-AC87U / RT-AX86U router running an Asus Merlin firmware.
-  <BR>It should work with other Asus routers as well.
-  <BR>Feedbacks are welcome.
-</i></strong>
+![Graph examples](images/graph_example.png)
