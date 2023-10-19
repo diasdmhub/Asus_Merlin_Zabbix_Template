@@ -13,7 +13,8 @@
 
 ### OVERVIEW
 If you want to monitor your Asus SOHO router using a Zabbix agent, this template offers some useful monitoring items, triggers, graphs and more.
-It targets Asus WRT routers with the Merlin firmware installed.
+It targets Asus WRT routers with the Merlin firmware installed. \
+The release comes with two templates, one for Zabbix Agent passive checks and other for active checks.
 
 The main focus is to monitor specific Asus Merlin Router items. \
 For generic Linux items, it is recommended to link your host to the OOTB Linux template which offers multiple items for monitoring, including CPU, memory, disk and bandwidth information.
