@@ -121,5 +121,5 @@ For generic Linux items, it is recommended to link your host to the OOTB Linux t
 <BR>
 	
 	
-### GRAPH EXAMPLE
+### DASHBOARD EXAMPLE
 ![Graph examples](images/graph_example.png)
