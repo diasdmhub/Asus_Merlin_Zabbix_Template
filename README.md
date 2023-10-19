@@ -28,6 +28,8 @@ For generic Linux items, it is recommended to link your host to the OOTB Linux t
 - Zabbix agent installed
   - You can try my [Zabbix Agent installation script](https://github.com/diasdmhub/Zabbix_agent_Asus_Merlin)
 
+<BR>
+
 
 ### SETUP
 
