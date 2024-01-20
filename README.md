@@ -9,12 +9,12 @@
 <BR>
 
 ### OVERVIEW
-If you want to monitor your Asus SOHO router using a Zabbix agent, this template offers some useful monitoring items, triggers, graphs and more.
+If you want to monitor your Asus SOHO router with a Zabbix agent, this template provides some useful monitoring items, triggers, graphs and more.
 It targets Asus WRT routers with the Merlin firmware installed. \
-The release comes with two templates, one for Zabbix Agent passive checks and other for active checks.
+The release comes with two templates, one for passive Zabbix Agent checks and one for active checks.
 
-The main focus is to monitor specific Asus Merlin Router items. \
-For generic Linux items, it is recommended to link your host to the OOTB Linux template which offers multiple items for monitoring, including CPU, memory, disk and bandwidth information.
+The main focus is on monitoring specific Asus WRT Merlin router items.
+> _**For general Linux items, it is recommended to [link your host](https://www.zabbix.com/documentation/current/en/manual/config/templates/linking) to the [official Linux template](https://www.zabbix.com/integrations/linux), which provides several items for monitoring, including CPU, memory, disk and bandwidth information.**_
 
 <BR>
 
@@ -24,7 +24,7 @@ For generic Linux items, it is recommended to link your host to the OOTB Linux t
 - Asus WRT Router with [Merlin firmware](https://www.asuswrt-merlin.net)
 - Entware installed
 - Zabbix agent installed
-  - You can try my [Zabbix Agent installation script](https://github.com/diasdmhub/Zabbix_agent_Asus_Merlin)
+  - _You can try my [Zabbix Agent installation script](https://github.com/diasdmhub/Zabbix_agent_Asus_Merlin)_
 
 <BR>
 
@@ -49,8 +49,8 @@ For generic Linux items, it is recommended to link your host to the OOTB Linux t
 
 
 ### TESTED VERSION
-- This template was tested only with Asus RT-AC86U / RT-AC87U / RT-AX86U router running an Asus Merlin firmware.
-- It should work with other Asus routers as well.
+- This template has only been tested with Asus RT-AC86U / RT-AC87U / RT-AX86U routers running an Asus Merlin firmware.
+- It should also work with other Asus routers.
 - [*SNBForums original post*](https://www.snbforums.com/threads/asus-merlin-router-with-zabbix-agent.64343)
 - [*WEB UI Memory discussion*](https://www.snbforums.com/threads/gui-memory-x-meminfo.68683/#post-645321)
 
