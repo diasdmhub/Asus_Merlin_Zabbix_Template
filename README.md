@@ -14,8 +14,6 @@ It targets Asus WRT routers with the Merlin firmware installed. \
 The release comes with two templates, one for passive Zabbix Agent checks and one for active checks.
 
 The main focus is on monitoring specific Asus WRT Merlin router items.
-> _**For general Linux items, it is recommended to [link your host](https://www.zabbix.com/documentation/current/en/manual/config/templates/linking) to the [official Linux template](https://www.zabbix.com/integrations/linux), which provides several items for monitoring, including CPU, memory, disk and bandwidth information.**_
-
 <BR>
 
 
@@ -43,6 +41,7 @@ The main focus is on monitoring specific Asus WRT Merlin router items.
 ### ➡️ [Download (latest)](https://github.com/diasdmhub/Asus_Merlin_Zabbix_Template/releases)
 ---
 #### ➡️ [*How to import templates*](https://www.zabbix.com/documentation/current/en/manual/xml_export_import/templates#importing)
+> _**For general Linux items, it is recommended to link your host to the official Linux template, which provides several items for monitoring, including CPU, memory, disk and bandwidth information.**_
 ---
 
 <BR>
