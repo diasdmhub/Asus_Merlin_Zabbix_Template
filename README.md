@@ -14,6 +14,7 @@ It targets Asus WRT routers with the Merlin firmware installed. \
 The release comes with two templates, one for passive Zabbix Agent checks and one for active checks.
 
 The main focus is on monitoring specific Asus WRT Merlin router items.
+
 <BR>
 
 
