@@ -1,15 +1,12 @@
 # Zabbix Template for Asus WRT Merlin Routers
 
 <div align="right">
-<a href="./LICENSE">
-	<img src="https://img.shields.io/badge/License-GPL3-blue?logo=opensourceinitiative&logoColor=fff" alt="License GPL3">
-</a>
-<a href="https://github.com/diasdmhub/Asus_Merlin_Zabbix_Template/releases/tag/latest">
-	<img src="https://img.shields.io/badge/Version-648-blue?logo=azurepipelines&amp;color=0aa8d2" alt="Latest Version">
-</a>
+	
+  [![LICENSE](https://img.shields.io/badge/License-GPL3-blue?logo=opensourceinitiative&logoColor=fff)](./LICENSE) 
+  [![VERSION](https://img.shields.io/badge/Version-6410-blue?logo=azurepipelines&amp;color=0aa8d2)](https://github.com/diasdmhub/Asus_Merlin_Zabbix_Template/releases/tag/latest)
 </div>
-<BR>
 
+<BR>
 
 ### OVERVIEW
 If you want to monitor your Asus SOHO router using a Zabbix agent, this template offers some useful monitoring items, triggers, graphs and more.
@@ -131,4 +128,4 @@ For generic Linux items, it is recommended to link your host to the OOTB Linux t
 	
 	
 ### DASHBOARD EXAMPLE
-![Graph examples](images/graph_example.png)
+![Graph examples](images/dash_sample.png)
