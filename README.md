@@ -59,29 +59,34 @@ For generic Linux items, it is recommended to link your host to the OOTB Linux t
 
 ### ITEMS
 
-| Name                            |
-| ------------------------------- |
-| AdGuard Home Status             |
-| Conmon CSV                      |
-| Conmon CSV: Conmon Jitter       |
-| Conmon CSV: Conmon Line Quality |
-| Conmon CSV: Conmon Ping         |
-| DNS Service IPv4                |
-| DNS Service IPv6                |
-| Device Model                    |
-| Internet IPv4                   |
-| Internet IPv6                   |
-| Memory WebUI Free               |
-| Memory WebUI Total              |
-| Memory WebUI Used               |
-| NTP Performance                 |
-| NTPMerlin CSV                   |
-| NTPMerlin CSV: NTPMerlin Drift  |
-| NTPMerlin CSV: NTPMerlin Offset |
-| Temperature CPU                 |
-| Temperature Wireless 2.4GHz     |
-| Temperature Wireless 5.0GHz     |
-| Web Performance                 |
+| Name                             |
+| -------------------------------- |
+| AdGuard Home Status              |
+| Conmon CSV                       |
+| Conmon CSV: Conmon Jitter        |
+| Conmon CSV: Conmon Line Quality  |
+| Conmon CSV: Conmon Ping          |
+| DNS Service IPv4                 |
+| DNS Service IPv6                 |
+| Device Model                     |
+| Internet IPv4                    |
+| Internet IPv6                    |
+| Memory WebUI Free                |
+| Memory WebUI Total               |
+| Memory WebUI Used                |
+| NTP Performance                  |
+| NTPMerlin CSV                    |
+| NTPMerlin CSV: NTPMerlin Drift   |
+| NTPMerlin CSV: NTPMerlin Offset  |
+| System NVRAM                     |
+| System Model                     |
+| System Firmware Version          |
+| System Firmware New Version Info |
+| System Firmware New Version Flag |
+| Temperature CPU                  |
+| Temperature Wireless 2.4GHz      |
+| Temperature Wireless 5.0GHz      |
+| Web Performance                  |
 
 <BR>
 
@@ -97,6 +102,7 @@ For generic Linux items, it is recommended to link your host to the OOTB Linux t
 | Conmon reports low line quality  |
 | DNS Service IPv4 down            |
 | DNS Service IPv6 down            |
+| New Firmware Version Available   |
 | NTP service is down              |
 | Web service is down              |
 | Wireless 2.4GHz high temperature |
