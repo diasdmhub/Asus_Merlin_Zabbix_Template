@@ -32,9 +32,8 @@ The main focus is on monitoring specific Asus WRT Merlin router items.
 
 - Configure the Zabbix Agent configuration file:
   - Use `Server=` parameter with your Zabbix Server IP/Hostname
-  - Add `AllowKey=system.run[*]` parameter *(necessary for custom checks)*
-  - Add `AllowRoot=1` parameter *(necessary since no Zabbix user is created)* \
-  [*Zabbix forum discussion*](https://www.zabbix.com/forum/zabbix-troubleshooting-and-problems/402023-zabbix-agent-system-run)
+  - Add [`AllowKey=system.run[*]` parameter](https://www.zabbix.com/documentation/6.4/en/manual/config/items/restrict_checks) *(necessary for custom checks)*
+  - Add `AllowRoot=1` parameter *(necessary since no Zabbix user is created)* ([*Zabbix forum discussion*](https://www.zabbix.com/forum/zabbix-troubleshooting-and-problems/402023-zabbix-agent-system-run))
 
 <BR>
 
@@ -42,7 +41,7 @@ The main focus is on monitoring specific Asus WRT Merlin router items.
 ### ➡️ [Download (latest)](https://github.com/diasdmhub/Asus_Merlin_Zabbix_Template/releases)
 ---
 #### ➡️ [*How to import templates*](https://www.zabbix.com/documentation/current/en/manual/xml_export_import/templates#importing)
-> _**For general Linux items, it is recommended to link your host to the official Linux template, which provides several items for monitoring, including CPU, memory, disk and bandwidth information.**_
+> _**For general Linux items, it is recommended to link your host to the [official Linux template](https://www.zabbix.com/integrations/linux), which provides several items for monitoring, including CPU, memory, disk and bandwidth information.**_
 ---
 
 <BR>
