@@ -56,6 +56,21 @@ The main focus is on monitoring specific Asus WRT Merlin router items.
 
 <BR>
 
+### MACROS USED
+
+| Name                   | Default Value   | Description |
+| ---------------------- | --------------- | ----------- |
+| {$CONMON.QUALITY.WARN} | `90`            | Warn value in % for Conmon Line Quality trigger |
+| {$CPU.HIGH.TEMP}       | `79`            | High temperature threshold in °C |
+| {$CPU.TOP.TEMP}        | `82`            | Higher temperature threshold in °C |
+| {$DNSNAME}             |                 | Desired domain name to query with "net.dns" key |
+| {$IF.INTERNET}         | `ppp0`          | Internet connected interface. Change at host level if it is different for your device |
+| {$IF.WLTEMP2}          | `eth5`          | 2.4GHz wireless interface for temperature sensor. Check your router's interface |
+| {$IF.WLTEMP5}          | `eth6`          | 5GHz wireless interface for temperature sensor. Check your router's interface |
+| {$WEB.PORT}            | `80`            | Define here your host HTTP/HTTPS port |
+| {$WEB.PROTOCOL}        | `http`          | Web protocol, HTTP or HTTPS, to monitor by TCP |
+
+<BR>
 
 ### ITEMS
 
@@ -123,7 +138,6 @@ The main focus is on monitoring specific Asus WRT Merlin router items.
 
 <BR>
 
-	
 ### WEB MONITORING
 
 | Name            |
@@ -131,7 +145,6 @@ The main focus is on monitoring specific Asus WRT Merlin router items.
 | WEB UI Scenario |
 
 <BR>
-	
 	
 ### DASHBOARD EXAMPLE
 ![Graph examples](images/dash_sample.png)
