@@ -3,7 +3,7 @@
 <div align="right">
 	
   [![LICENSE](https://img.shields.io/badge/License-GPL3-blue?logo=opensourceinitiative&logoColor=fff)](./LICENSE) 
-  [![VERSION](https://img.shields.io/badge/Version-6410-blue?logo=azurepipelines&amp;color=0aa8d2)](https://github.com/diasdmhub/Asus_Merlin_Zabbix_Template/releases/tag/latest)
+  [![VERSION](https://img.shields.io/badge/Version-702-blue?logo=azurepipelines&amp;color=0aa8d2)](https://github.com/diasdmhub/Asus_Merlin_Zabbix_Template/releases/tag/latest)
 </div>
 
 <BR>
