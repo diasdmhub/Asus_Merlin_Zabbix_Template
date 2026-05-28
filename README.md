@@ -66,7 +66,8 @@ The main focus is on monitoring specific Asus WRT Merlin router items.
 | {$DNSNAME}             |                 | Desired domain name to query with "net.dns" key |
 | {$IF.INTERNET}         | `ppp0`          | Internet connected interface. Change at host level if it is different for your device |
 | {$IF.WLTEMP2}          | `eth5`          | 2.4GHz wireless interface for temperature sensor. Check your router's interface |
-| {$IF.WLTEMP5}          | `eth6`          | 5GHz wireless interface for temperature sensor. Check your router's interface |
+| {$IF.WLTEMP5}          | `eth6`          | Primary 5GHz wireless interface for temperature sensor. Check your router's interface |
+| {$IF.WLTEMP5.2}        |                 | Optional secondary 5GHz wireless interface *(7.0+ template only)*. Set at host level and enable the second 5GHz temperature item; leave empty (default) to keep it disabled |
 | {$WEB.PORT}            | `80`            | Define here your host HTTP/HTTPS port |
 | {$WEB.PROTOCOL}        | `http`          | Web protocol, HTTP or HTTPS, to monitor by TCP |
 
@@ -101,6 +102,7 @@ The main focus is on monitoring specific Asus WRT Merlin router items.
 | Temperature CPU                  |
 | Temperature Wireless 2.4GHz      |
 | Temperature Wireless 5.0GHz      |
+| Temperature Wireless 5.0GHz #2 *(7.0+ only)* |
 | Web Performance                  |
 
 <BR>
@@ -122,6 +124,7 @@ The main focus is on monitoring specific Asus WRT Merlin router items.
 | Web service is down              |
 | Wireless 2.4GHz high temperature |
 | Wireless 5.0Hz high temperature  |
+| Wireless 5.0GHz #2 high temperature *(7.0+ only)* |
 
 <BR>
 

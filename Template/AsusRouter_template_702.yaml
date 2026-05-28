@@ -10,11 +10,16 @@ zabbix_export:
       description: |
         Asus WRT router template for Merlin firmware with Zabbix Agent passive
         
+        Supports an optional second 5GHz wireless radio for temperature monitoring.
+        To enable: set macro {$IF.WLTEMP5.2} to the second interface name at host level,
+        then enable the "Temperature Wireless 5.0GHz #2" item on the host.
+        Leave {$IF.WLTEMP5.2} unset (default) to keep the second radio item disabled.
+        
         by diasdm
         https://github.com/diasdmhub/Zabbix_Template_Asus_Merlin
       vendor:
         name: diasdm
-        version: 7.0-2
+        version: 7.0-3
       groups:
         - name: 'Templates/Network devices'
       items:
@@ -435,6 +440,29 @@ zabbix_export:
               tags:
                 - tag: Temp
                   value: high
+        - uuid: f1e2d3c4b5a647e28f9a0b1c2d3e4f5a
+          name: 'Temperature Wireless 5.0GHz #2'
+          key: 'system.run[wl -i {$IF.WLTEMP5.2} phy_tempsense | awk ''{print $1/2+20}'']'
+          status: DISABLED
+          history: 7d
+          value_type: FLOAT
+          units: °C
+          description: 'Optional second 5.0GHz wireless radio temperature. Set {$IF.WLTEMP5.2} at host level and enable this item when a second 5GHz interface is present.'
+          tags:
+            - tag: System
+              value: temperature
+          triggers:
+            - uuid: a2b3c4d5e6f7481f9a0b1c2d3e4f5a6b
+              expression: 'avg(/Asus Router by Zabbix Agent/system.run[wl -i {$IF.WLTEMP5.2} phy_tempsense | awk ''{print $1/2+20}''],#3)>=65'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: 'avg(/Asus Router by Zabbix Agent/system.run[wl -i {$IF.WLTEMP5.2} phy_tempsense | awk ''{print $1/2+20}''],#3)<64'
+              name: 'Wireless 5.0GHz #2 high temperature'
+              opdata: '{ITEM.LASTVALUE}'
+              priority: AVERAGE
+              description: 'The last 3 values average indicate a Wireless 5.0GHz #2 high temperature'
+              tags:
+                - tag: Temp
+                  value: high
         - uuid: ce4b84ae8d1e4c978f32b02d22729733
           name: 'Conmon CSV'
           key: 'vfs.file.contents[/jffs/addons/connmon.d/lastx.csv]'
@@ -618,7 +646,9 @@ zabbix_export:
           description: '2.4GHz wireless interface for temperature sensor. Check your router''s interface'
         - macro: '{$IF.WLTEMP5}'
           value: eth6
-          description: '5GHz wireless interface for temperature sensor. Check your router''s interface'
+          description: 'Primary 5GHz wireless interface for temperature sensor. Check your router''s interface'
+        - macro: '{$IF.WLTEMP5.2}'
+          description: 'Optional secondary 5GHz wireless interface. Set at host level and enable the second 5GHz temperature item; leave empty (default) to keep it disabled'
         - macro: '{$WEB.PORT}'
           value: '80'
           description: 'Define here your host HTTP/HTTPS port'
@@ -638,6 +668,11 @@ zabbix_export:
       name: 'Asus Router by Zabbix Agent active'
       description: |
         Asus WRT router template for Merlin firmware with Zabbix Agent active
+        
+        Supports an optional second 5GHz wireless radio for temperature monitoring.
+        To enable: set macro {$IF.WLTEMP5.2} to the second interface name at host level,
+        then enable the "Temperature Wireless 5.0GHz #2" item on the host.
+        Leave {$IF.WLTEMP5.2} unset (default) to keep the second radio item disabled.
         
         by diasdm
         https://github.com/diasdmhub/Zabbix_Template_Asus_Merlin
@@ -1070,6 +1105,30 @@ zabbix_export:
               tags:
                 - tag: Temp
                   value: high
+        - uuid: b3c4d5e6f7a8492a8b1c2d3e4f5a6b7c
+          name: 'Temperature Wireless 5.0GHz #2'
+          type: ZABBIX_ACTIVE
+          key: 'system.run[wl -i {$IF.WLTEMP5.2} phy_tempsense | awk ''{print $1/2+20}'']'
+          status: DISABLED
+          history: 7d
+          value_type: FLOAT
+          units: °C
+          description: 'Optional second 5.0GHz wireless radio temperature. Set {$IF.WLTEMP5.2} at host level and enable this item when a second 5GHz interface is present.'
+          tags:
+            - tag: System
+              value: temperature
+          triggers:
+            - uuid: c4d5e6f7a8b9403b8c2d3e4f5a6b7c8d
+              expression: 'avg(/Asus Router by Zabbix Agent active/system.run[wl -i {$IF.WLTEMP5.2} phy_tempsense | awk ''{print $1/2+20}''],#3)>=65'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: 'avg(/Asus Router by Zabbix Agent active/system.run[wl -i {$IF.WLTEMP5.2} phy_tempsense | awk ''{print $1/2+20}''],#3)<64'
+              name: 'Wireless 5.0GHz #2 high temperature'
+              opdata: '{ITEM.LASTVALUE}'
+              priority: AVERAGE
+              description: 'The last 3 values average indicate a Wireless 5.0GHz #2 high temperature'
+              tags:
+                - tag: Temp
+                  value: high
         - uuid: eea58a2ef3b14ea8afa9b097ac1dba13
           name: 'Conmon CSV'
           type: ZABBIX_ACTIVE
@@ -1259,7 +1318,9 @@ zabbix_export:
           description: '2.4GHz wireless interface for temperature sensor. Check your router''s interface'
         - macro: '{$IF.WLTEMP5}'
           value: eth6
-          description: '5GHz wireless interface for temperature sensor. Check your router''s interface'
+          description: 'Primary 5GHz wireless interface for temperature sensor. Check your router''s interface'
+        - macro: '{$IF.WLTEMP5.2}'
+          description: 'Optional secondary 5GHz wireless interface. Set at host level and enable the second 5GHz temperature item; leave empty (default) to keep it disabled'
         - macro: '{$WEB.PORT}'
           value: '80'
           description: 'Define here your host HTTP/HTTPS port'
@@ -1429,6 +1490,12 @@ zabbix_export:
           item:
             host: 'Asus Router by Zabbix Agent'
             key: 'system.run[wl -i {$IF.WLTEMP5} phy_tempsense | awk ''{print $1/2+20}'']'
+        - sortorder: '4'
+          drawtype: BOLD_LINE
+          color: 4CAF50
+          item:
+            host: 'Asus Router by Zabbix Agent'
+            key: 'system.run[wl -i {$IF.WLTEMP5.2} phy_tempsense | awk ''{print $1/2+20}'']'
     - uuid: c908963d765f4692877d62c617259bfe
       name: Temperature
       ymin_type_1: FIXED
@@ -1451,6 +1518,12 @@ zabbix_export:
           item:
             host: 'Asus Router by Zabbix Agent active'
             key: 'system.run[wl -i {$IF.WLTEMP5} phy_tempsense | awk ''{print $1/2+20}'']'
+        - sortorder: '4'
+          drawtype: BOLD_LINE
+          color: 4CAF50
+          item:
+            host: 'Asus Router by Zabbix Agent active'
+            key: 'system.run[wl -i {$IF.WLTEMP5.2} phy_tempsense | awk ''{print $1/2+20}'']'
     - uuid: 8f04d82df77444929df9b72e4b62d61f
       name: 'WEB x NTP Perfomance'
       show_work_period: 'NO'
